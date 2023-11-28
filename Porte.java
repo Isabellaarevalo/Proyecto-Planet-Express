@@ -90,22 +90,12 @@ public class Porte {
 
     // TODO: ¿Están llenos todos los huecos?
     public boolean porteLleno() {
-        if (numHuecosLibres()!=0){
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
-    // TODO: ¿Está ocupado el hueco consultado?
-    public boolean huecoOcupado(int fila, int columna) {
-        if (huecos[fila][columna]){
-            return true;
-        }
-        else {
-            return false;
+            return listaEnvios.estaLlena();
         }
 
+    // TODO: ¿Está ocupado el hueco consultado?
+    public boolean huecoOcupado(int fila, int columna) {
+        return (huecos[fila-1][columna-1]);
     }
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
