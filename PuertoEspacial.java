@@ -1,8 +1,8 @@
 /**
  * Description of the class
  *
- * @author
- * @author
+ * @author Isabella Arévalo
+ * @author Sara Galinova
  * @version     1.0
  */
 public class PuertoEspacial {
@@ -60,10 +60,19 @@ public class PuertoEspacial {
      */
     public double distancia(PuertoEspacial destino) {
         // TODO: Para calcular la distancia entre dos Puertos Espaciales, se transforman sus coordenadas esféricas a cartesianas
-
-
+        double x1, x2=0;
+        double y1, y2=0;
+        double z1, z2=0;
+        double d=0;
+        x1 = this.radio*Math.sin(this.azimut)*Math.cos(this.polar);
+        y1 = this.radio*Math.sin(this.azimut)*Math.sin(this.polar);
+        z1 = this.radio*Math.cos(this.azimut);
+        x2 = destino.getRadio()*Math.sin(destino.getAzimut())*Math.cos(destino.getPolar());
+        y2 = destino.getRadio()*Math.sin(destino.getAzimut()*Math.sin(destino.getPolar()));
+        z2 = destino.getRadio()*Math.cos(this.azimut);
         // TODO: Una vez se tienen las coordenadas cartesianas, basta con calcular la distancia euclídea entre ellas:
-        return ;
+        d = Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2)+Math.pow(z2-z1,2));
+        return d;
     }
 
     /**
@@ -71,7 +80,7 @@ public class PuertoEspacial {
      * @return ejemplo -> "Gaia Galactic Terminal(GGT), en (1.0 90.0 0.0), con 8 muelles" (Radio, Azimut, Polar)
      */
     public String toString() {
-        return " ";
+        return nombre+"("+codigo+"), en ("+radio+" "+azimut+" "+polar+"), con "+numMuelles+" muelles" ;
     }
 
     /**
@@ -79,6 +88,6 @@ public class PuertoEspacial {
      * @return ejemplo -> "Gaia Galactic Terminal (GGT)"
      */
     public String toStringSimple() {
-        return " ";
+        return nombre+"("+codigo+")";
     }
 }
