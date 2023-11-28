@@ -1,8 +1,8 @@
 /**
  * Description of the class
  *
- * @author
- * @author
+ * @author Isabella Arévalo
+ * @author Sara Galinova
  * @version     1.0
  */
 public class Nave {
@@ -57,7 +57,7 @@ public class Nave {
      * @return ejemplo del formato -> "Planet Express One (EP-245732X): 40 contenedores, hasta 1.57 UA"
      */
     public String toString() {
-        return " ";
+        return modelo+" ("+matricula+"): "+filas*columnas+" contenedores, hasta" +alcance+" UA";
     }
 
 
@@ -66,6 +66,6 @@ public class Nave {
      * @return ejemplo del formato -> "Planet Express One (EP-245732X)"
      */
     public String toStringSimple() {
-        return " ";
+        return modelo+"("+matricula+")";
     }
 }

@@ -3,8 +3,8 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author
- * @author
+ * @author Isabella Arévalo
+ * @author Sara Galinova
  * @version     1.0
  */
 public class Utilidades {
@@ -19,9 +19,16 @@ public class Utilidades {
      */
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
         int numero;
-
-
+        do {
+            System.out.print(mensaje);
+            numero = teclado.nextInt();
+            if (numero < minimo)
+                System.out.println("El número " + numero + " no es mayor que " + minimo);
+            else if (numero > maximo)
+                System.out.println("El número " + numero + " no es menor que " + maximo);
+        } while (numero < minimo || numero > maximo);
         return numero;
+
     }
 
     /**
@@ -34,8 +41,14 @@ public class Utilidades {
      */
     public static long leerNumero(Scanner teclado, String mensaje, long minimo, long maximo) {
         long numero;
-
-
+        do {
+            System.out.print(mensaje);
+            numero = teclado.nextInt();
+            if (numero < minimo)
+                System.out.println("El número " + numero + " no es mayor que " + minimo);
+            else if (numero > maximo)
+                System.out.println("El número " + numero + " no es menor que " + maximo);
+        } while (numero < minimo || numero > maximo);
         return numero;
     }
 
@@ -49,7 +62,14 @@ public class Utilidades {
      */
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
         double numero;
-
+        do {
+            System.out.print(mensaje);
+            numero = teclado.nextInt();
+            if (numero < minimo)
+                System.out.println("El número " + numero + " no es mayor que " + minimo);
+            else if (numero > maximo)
+                System.out.println("El número " + numero + " no es menor que " + maximo);
+        } while (numero < minimo || numero > maximo);
         return numero;
     }
 
@@ -63,9 +83,14 @@ public class Utilidades {
      */
     public static char leerLetra(Scanner teclado, String mensaje, char minimo, char maximo) {
         char letra;
-
-
-
+        do {
+            System.out.print(mensaje);
+            letra = teclado.next().charAt(0);
+            if (letra < minimo)
+                System.out.println("El número " + letra + " no es mayor que " + minimo);
+            else if (letra > maximo)
+                System.out.println("El número " + letra + " no es menor que " + maximo);
+        } while (letra < minimo || letra > maximo);
         return letra;
     }
 
@@ -77,12 +102,10 @@ public class Utilidades {
      * @return Fecha
      */
     public static Fecha leerFecha(Scanner teclado, String mensaje) {
-        int dia;
-        int mes;
-        int anio;
-
-
-
+        int dia=0;
+        int mes=0;
+        int anio=0;
+        Fecha.comprobarFecha(dia, mes, anio);
         return new Fecha(dia, mes, anio);
     }
 
@@ -94,15 +117,14 @@ public class Utilidades {
      * @return Fecha
      */
     public static Fecha leerFechaHora(Scanner teclado, String mensaje) {
-        int dia;
-        int mes;
-        int anio;
-        int hora;
-        int minuto;
-        int segundo;
-
-
-
+        int dia=0;
+        int mes=0;
+        int anio=0;
+        int hora=0;
+        int minuto=0;
+        int segundo=0;
+        Fecha.comprobarFecha(dia, mes, anio);
+        Fecha.comprobarHora(hora,minuto,segundo);
         return new Fecha(dia, mes, anio, hora, minuto, segundo);
     }
 
@@ -113,6 +135,7 @@ public class Utilidades {
      * @return
      */
     public static String leerCadena(Scanner teclado, String s) {
+        s = teclado.nextLine();
         System.out.print(s);
         return teclado.next();
     }
