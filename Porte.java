@@ -233,9 +233,14 @@ public class Porte {
      */
     public static String generarID(Random rand) {
         //REVISAR
-        return "PM";
+            String ID = "PM";
+            int[] numeros = rand.ints(4, 0, 9).toArray();
+            for (int numero : numeros) {
+                ID += String.valueOf(numero);
+            }
+            return ID;
+        }
         // (int)Math.random()*9;
-    }
 
     /**
      * TODO: Crea y devuelve un objeto Porte de los datos que selecciona el usuario de puertos espaciales
