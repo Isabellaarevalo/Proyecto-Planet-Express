@@ -109,8 +109,7 @@ public class Porte {
      * @return el objeto Envio que corresponde, o null si está libre o se excede en el límite de fila y columna
      */
     public Envio buscarEnvio(int fila, int columna) {
-
-        return null;
+        return listaEnvios.buscarEnvio(id, fila, columna);
     }
 
 
@@ -121,8 +120,16 @@ public class Porte {
      * @return
      */
     public boolean ocuparHueco(Envio envio) {
-
-        return false;
+        for (int i = 0; i <= nave.getFilas(); i++) {
+            for (int j = 0; j < nave.getColumnas(); j++) {
+                if (!huecos[i][j]) {
+                    ocuparHueco(envio);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
     }
 
 
@@ -132,9 +139,12 @@ public class Porte {
      * @return
      */
     public boolean desocuparHueco(String localizador) {
+        //LOCALIZAR ENVIO, IDENTIFICAR FILAS Y COLUMNAS, FALSE ESA POSICION
+        buscarEnvio(localizador);
+        //if (){
+            return false;
 
-        return false;
-    }
+        }
 
     /**
      * TODO: Devuelve una cadena con información completa del porte
@@ -142,7 +152,10 @@ public class Porte {
      *  Cidonia(CID) M1 (01/01/2024 11:00:05) en Planet Express One(EP-245732X) por 13424,56 SSD, huecos libres: 10"
      */
     public String toString() {
-        return "";
+        //por verificar
+        return "Porte "+id+" de "+origen.getNombre()+"("+origen.getCodigo()+" "+muelleOrigen+" ("+salida+") a"
+                +destino.getNombre()+" ("+destino.getCodigo()+" "+muelleDestino+" " + "("+llegada+" en"+nave+" por "+precio+" SSD, " +
+                "huecos libres:"+numHuecosLibres();
     }
 
 
@@ -151,7 +164,8 @@ public class Porte {
      * @return ejemplo del formato -> "Porte PM0066 de GGT M5 (01/01/2023 08:15:00) a CID M1 (01/01/2024 11:00:05)"
      */
     public String toStringSimple() {
-        return "";
+        return "Porte"+id+" de "+origen.getCodigo()+" "+muelleOrigen+"("+salida+") a " +
+                ""+destino.getCodigo()+" "+muelleDestino+" ("+llegada;
     }
 
 
@@ -163,7 +177,12 @@ public class Porte {
      * @return
      */
     public boolean coincide(String codigoOrigen, String codigoDestino, Fecha fecha) {
-        return ;
+        //confirmar lo de fecha
+        if((codigoOrigen == origen.getCodigo())&& (codigoDestino==destino.getCodigo()&&(fecha ==salida))){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
@@ -177,8 +196,15 @@ public class Porte {
      *     10[ ][ ][ ]
      */
     public void imprimirMatrizHuecos() {
-        System.out.print("  ");
-
+        for (int i = 0; i <= nave.getFilas(); i++) {
+            for (int j = 0; j < nave.getColumnas(); j++) {
+                if (!huecos[i][j]) {
+                    System.out.print("[ ]");
+                } else {
+                    System.out.print("[X]");
+                }
+            }
+        }
     }
 
     /**
@@ -206,7 +232,9 @@ public class Porte {
      * @return ejemplo -> "PM0123"
      */
     public static String generarID(Random rand) {
+        //REVISAR
         return "PM";
+        // (int)Math.random()*9;
     }
 
     /**
@@ -226,6 +254,7 @@ public class Porte {
                                   ListaNaves naves,
                                   ListaPortes portes) {
 
+        // do while (
         return null;
     }
 }
