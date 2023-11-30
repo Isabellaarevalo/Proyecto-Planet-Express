@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
@@ -214,13 +215,21 @@ public class Porte {
      * @return
      */
     public boolean generarListaEnvios(String fichero) {
-        PrintWriter pw = null;
+        PrintWriter salida = null;
         try {
-
-            return true;
+            salida = new PrintWriter(new FileWriter(fichero));
+            salida.println("--------------------------------------------------");
+            salida.println("-------- Lista de envíos del porte"+id+"--------");
+            salida.println("--------------------------------------------------");
         } catch (FileNotFoundException e) {
+            System.out.println("Error de escritura del fichero");
             return false;
+        } finally {
+            if (salida!=null){
+                return true;
+            }
         }
+        return true;
     }
 
 
@@ -240,7 +249,6 @@ public class Porte {
             }
             return ID;
         }
-        // (int)Math.random()*9;
 
     /**
      * TODO: Crea y devuelve un objeto Porte de los datos que selecciona el usuario de puertos espaciales

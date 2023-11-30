@@ -3,7 +3,8 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author Taller de Programación
+ * @author Isabella Arévalo
+ * @author Sara Galinova
  * @version     1.0
  */
 public class Cliente {
@@ -37,21 +38,29 @@ public class Cliente {
     }
     // TODO: Texto que debe generar: Zapp Brannigan, zapp.brannigan@dop.gov
     public String toString() {
+        return nombre+" "+apellidos+","+email;
 
     }
     // TODO: Devuelve un booleano que indica si se ha alcanzado el número máximo de envíos
     public boolean maxEnviosAlcanzado() {
-
+        if (listaEnvios.estaLlena()==true){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
+
     // TODO: Devuelve un envío en función de su posición
     public Envio getEnvio(int i) {
-
+        return getEnvio(i);
     }
     public ListaEnvios getListaEnvios() {
         return listaEnvios;
     }
     // TODO: Añade un envío al cliente
     public boolean aniadirEnvio(Envio envio) {
+        return listaEnvios.insertarEnvio(envio);
 
     }
     public Envio buscarEnvio(String localizador) {
@@ -94,6 +103,13 @@ public class Cliente {
      * @return
      */
     public static boolean correctoEmail(String email) {
-        return false;
+        boolean correcto = false;
+        String[] emailSeparado = email.split("@");
+        if (emailSeparado.length > 1) {
+            if (emailSeparado[1].equals("planetexpress.com") && emailSeparado[0].matches("^[a-zA-Z]+(?:[\\. a-zA-Z]+)?$")) {
+                correcto = true;
+            }
+        }
+        return correcto;
     }
-}
+    }
