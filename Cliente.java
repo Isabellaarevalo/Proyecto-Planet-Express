@@ -68,6 +68,7 @@ public class Cliente {
     }
     // TODO: Elimina el envío de la lista de envíos del pasajero
     public boolean cancelarEnvio(String localizador) {
+        return getListaEnvios().eliminarEnvio(localizador);
 
     }
     public void listarEnvios() {
@@ -89,9 +90,26 @@ public class Cliente {
      * @return Cliente
      */
     public static Cliente altaCliente(Scanner teclado, ListaClientes clientes, int maxEnvios) {
-
-
-
+        String nombre, apellidos, email;
+        Cliente cliente = null;
+        // do while
+        do{
+            System.out.println("Nombre:");
+            nombre = teclado.nextLine();
+        } while (nombre.equals(" "));
+        do{
+            System.out.println("Apellidos:");
+            apellidos = teclado.nextLine();
+        } while (nombre.equals(""));
+        do{
+            System.out.println("Email:");
+            email = teclado.nextLine();
+            if (!correctoEmail(email)) {
+                System.out.println("Email incorrecto.");
+            } else if (cliente.getEmail() != null) {
+                System.out.println("Email ya existe.");
+            }
+        } while (!correctoEmail(email) || cliente.getEmail() != null);
 
         return new Cliente(nombre, apellidos, email, maxEnvios);
     }
