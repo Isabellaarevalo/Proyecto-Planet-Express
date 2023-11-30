@@ -86,6 +86,7 @@ public class Envio {
      *     Precio: 13424,56 SSD
      */
     public boolean generarFactura(String fichero) {
+        PrintWriter salida = null;
         try {
 
 
@@ -113,8 +114,13 @@ public class Envio {
      */
     public static String generarLocalizador(Random rand, String idPorte) {
         StringBuilder localizador = new StringBuilder(idPorte);
-
-
+        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String aleatorio = "";
+        for (int i = 0; i < 4; i++) {
+            char c = alphabet.charAt(rand.nextInt(alphabet.length()));
+            aleatorio += c;
+        }
+        idPorte= idPorte + aleatorio;
 
         return localizador.toString();
     }

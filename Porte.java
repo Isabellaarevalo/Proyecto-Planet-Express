@@ -243,7 +243,7 @@ public class Porte {
     public static String generarID(Random rand) {
         //REVISAR
             String ID = "PM";
-            int[] numeros = rand.ints(4, 0, 9).toArray();
+            int[] numeros =rand.ints(4,0,9).toArray();
             for (int numero : numeros) {
                 ID += String.valueOf(numero);
             }
