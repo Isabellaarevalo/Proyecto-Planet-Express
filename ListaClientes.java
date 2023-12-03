@@ -26,22 +26,46 @@ public class ListaClientes {
     }
     // TODO: Devuelve el número de clientes que hay en la lista de clientes
     public int getOcupacion() {
+        return ocupacion;
 
     }
     // TODO: ¿Está llena la lista de clientes?
     public boolean estaLlena() {
+        return ocupacion ==capacidad;
 
     }
 	// TODO: Devuelve el cliente dada el indice
     public Cliente getCliente(int i) {
-        return null;
+        Cliente cliente = null;
+        if (i < ocupacion) {
+            cliente = clientes[i];
+        }
+        return cliente;
     }
     // TODO: Inserta el cliente en la lista de clientes
     public boolean insertarCliente(Cliente cliente) {
+        boolean correcto = false;
+        if (!estaLlena()) {
+            clientes[ocupacion] = cliente;
+            ocupacion++;
+            correcto = true;
+        }
+        return correcto;
 
     }
     // TODO: Devuelve el cliente que coincida con el email, o null en caso de no encontrarlo
     public Cliente buscarClienteEmail(String email) {
+        Cliente clienteAct = null;
+        boolean seCumple = false;
+        int i = 0;
+        while (i < ocupacion && !seCumple) {
+            if (clientes[i].getEmail().equals(email)) {
+                clienteAct = clientes[i];
+                seCumple = true;
+            }
+            i++;
+        }
+        return clienteAct;
 
     }
 
@@ -54,10 +78,7 @@ public class ListaClientes {
      * @return
      */
     public Cliente seleccionarCliente(Scanner teclado, String mensaje) {
-        Cliente cliente = null;
 
-
-        return cliente;
     }
 
     /**

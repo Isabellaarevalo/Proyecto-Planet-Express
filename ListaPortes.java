@@ -16,6 +16,8 @@ public class ListaPortes {
      *
      * @param capacidad
      */
+    private int capacidad;
+    private int ocupacion=0;
     public ListaPortes(int capacidad) {
         
 		
@@ -53,8 +55,18 @@ public class ListaPortes {
      * @return el objeto Porte que encontramos o null si no existe
      */
     public Porte buscarPorte(String id) {
+        Porte aeropuertoAct = null;
+        boolean seCumple = false;
+        int i = 0;
+        while (i < ocupacion && !seCumple) {
+            if (portes[i].getID().equals(id)) {
+                aeropuertoAct=getPorte(i);
+                seCumple = true;
+            }
+            i++;
+        }
+        return aeropuertoAct;
 
-        return null;
     }
 
     /**
