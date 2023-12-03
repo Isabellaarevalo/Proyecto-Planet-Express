@@ -26,7 +26,7 @@ public class Porte {
 
     /**
      * TODO: Completa el constructo de la clase
-     * 
+     *
      * @param id
      * @param nave
      * @param origen
@@ -49,55 +49,66 @@ public class Porte {
         this.precio = precio;
 
     }
+
     public String getID() {
         return id;
     }
-    public Nave getNave(){
+
+    public Nave getNave() {
         return nave;
     }
+
     public PuertoEspacial getOrigen() {
         return origen;
     }
+
     public int getMuelleOrigen() {
         return muelleOrigen;
     }
-    public Fecha getSalida(){
+
+    public Fecha getSalida() {
         return salida;
     }
+
     public PuertoEspacial getDestino() {
         return destino;
     }
+
     public int getMuelleDestino() {
         return muelleDestino;
     }
+
     public Fecha getLlegada() {
         return llegada;
     }
+
     public double getPrecio() {
         return precio;
     }
+
     // TODO: Devuelve el número de huecos libres que hay en el porte
     public int numHuecosLibres() {
-        int huecosLibres=0;
-        for (int i=0; i<=nave.getFilas(); i++){
-            for (int j =0; j<nave.getColumnas(); j++){
-                if (!huecos[i][j]){
+        int huecosLibres = 0;
+        for (int i = 0; i <= nave.getFilas(); i++) {
+            for (int j = 0; j < nave.getColumnas(); j++) {
+                if (!huecos[i][j]) {
                     huecosLibres++;
                 }
             }
-            }
-        return huecosLibres;
         }
+        return huecosLibres;
+    }
 
     // TODO: ¿Están llenos todos los huecos?
     public boolean porteLleno() {
-            return listaEnvios.estaLlena();
-        }
+        return listaEnvios.estaLlena();
+    }
 
     // TODO: ¿Está ocupado el hueco consultado?
     public boolean huecoOcupado(int fila, int columna) {
-        return (huecos[fila-1][columna-1]);
+        return (huecos[fila - 1][columna - 1]);
     }
+
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
     }
@@ -105,6 +116,7 @@ public class Porte {
 
     /**
      * TODO: Devuelve el objeto Envio que corresponde con una fila o columna,
+     *
      * @param fila
      * @param columna
      * @return el objeto Envio que corresponde, o null si está libre o se excede en el límite de fila y columna
@@ -117,6 +129,7 @@ public class Porte {
     /**
      * TODO: Método que Si está desocupado el hueco que indica el envio, lo pone ocupado y devuelve true,
      *  si no devuelve false
+     *
      * @param envio
      * @return
      */
@@ -136,6 +149,7 @@ public class Porte {
 
     /**
      * TODO: A través del localizador del envio, se desocupará el hueco
+     *
      * @param localizador
      * @return
      */
@@ -143,35 +157,38 @@ public class Porte {
         //LOCALIZAR ENVIO, IDENTIFICAR FILAS Y COLUMNAS, FALSE ESA POSICION
         buscarEnvio(localizador);
         //if (){
-            return false;
+        return false;
 
-        }
+    }
 
     /**
      * TODO: Devuelve una cadena con información completa del porte
+     *
      * @return ejemplo del formato -> "Porte PM0066 de Gaia Galactic Terminal(GGT) M5 (01/01/2023 08:15:00) a
-     *  Cidonia(CID) M1 (01/01/2024 11:00:05) en Planet Express One(EP-245732X) por 13424,56 SSD, huecos libres: 10"
+     * Cidonia(CID) M1 (01/01/2024 11:00:05) en Planet Express One(EP-245732X) por 13424,56 SSD, huecos libres: 10"
      */
     public String toString() {
         //por verificar
-        return "Porte "+id+" de "+origen.getNombre()+"("+origen.getCodigo()+" "+muelleOrigen+" ("+salida+") a"
-                +destino.getNombre()+" ("+destino.getCodigo()+" "+muelleDestino+" " + "("+llegada+" en"+nave+" por "+precio+" SSD, " +
-                "huecos libres:"+numHuecosLibres();
+        return "Porte " + id + " de " + origen.getNombre() + "(" + origen.getCodigo() + " " + muelleOrigen + " (" + salida + ") a"
+                + destino.getNombre() + " (" + destino.getCodigo() + " " + muelleDestino + " " + "(" + llegada + " en" + nave + " por " + precio + " SSD, " +
+                "huecos libres:" + numHuecosLibres();
     }
 
 
     /**
      * TODO: Devuelve una cadena con información abreviada del vuelo
+     *
      * @return ejemplo del formato -> "Porte PM0066 de GGT M5 (01/01/2023 08:15:00) a CID M1 (01/01/2024 11:00:05)"
      */
     public String toStringSimple() {
-        return "Porte"+id+" de "+origen.getCodigo()+" "+muelleOrigen+"("+salida+") a " +
-                ""+destino.getCodigo()+" "+muelleDestino+" ("+llegada;
+        return "Porte" + id + " de " + origen.getCodigo() + " " + muelleOrigen + "(" + salida + ") a " +
+                "" + destino.getCodigo() + " " + muelleDestino + " (" + llegada;
     }
 
 
     /**
      * TODO: Devuelve true si el código origen, destino y fecha son los mismos que el porte
+     *
      * @param codigoOrigen
      * @param codigoDestino
      * @param fecha
@@ -179,7 +196,7 @@ public class Porte {
      */
     public boolean coincide(String codigoOrigen, String codigoDestino, Fecha fecha) {
         //confirmar lo de fecha
-        if((codigoOrigen == origen.getCodigo())&& (codigoDestino==destino.getCodigo()&&(fecha ==salida))){
+        if ((codigoOrigen == origen.getCodigo()) && (codigoDestino == destino.getCodigo() && (fecha == salida))) {
             return true;
         } else {
             return false;
@@ -197,16 +214,21 @@ public class Porte {
      *     10[ ][ ][ ]
      */
     public void imprimirMatrizHuecos() {
-        for (int i = 0; i <= nave.getFilas(); i++) {
-            for (int j = 0; j < nave.getColumnas(); j++) {
-                if (!huecos[i][j]) {
-                    System.out.print("[ ]");
+        int columnas=0, filas=0;
+        for (filas = 0; filas <= nave.getFilas(); filas++) {
+            for (columnas = 0; columnas < nave.getColumnas(); columnas++) {
+                if (filas == 0 && columnas == 0) {
+                    System.out.println(" ");
                 } else {
-                    System.out.print("[X]");
+                    //not sure
                 }
             }
         }
+        if (filas >= 1 && filas <= nave.getFilas() && columnas != 0)
+            System.out.print("[ ]");
     }
+
+
 
     /**
      * TODO: Devuelve true si ha podido escribir en un fichero la lista de envíos del porte, siguiendo las indicaciones

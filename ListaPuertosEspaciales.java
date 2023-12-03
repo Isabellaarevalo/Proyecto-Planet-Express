@@ -4,8 +4,8 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author
- * @author
+ * @author Isabella Arévalo
+ * @author Sara Galinova
  * @version     1.0
  */
 public class ListaPuertosEspaciales {

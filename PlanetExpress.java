@@ -4,7 +4,8 @@ import java.util.Scanner;
 /**
  * Clase principal de Planet Express App, la práctica de Taller de Programación
  *
- * @author      Taller de Progamación
+ * @author Isabella Arévalo
+ * @author Sara Galinova
  * @version     1.0
  */
 public class PlanetExpress {

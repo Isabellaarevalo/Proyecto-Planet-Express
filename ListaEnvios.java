@@ -7,8 +7,8 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author
- * @author
+ * @author Isabella Arévalo
+ * @author Sara Galinova
  * @version     1.0
  */
 public class ListaEnvios {
@@ -16,23 +16,30 @@ public class ListaEnvios {
     /**
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
-     * @param capacidad
+     * @param capacidad máxima de la lista
+     * @param ocupacion
      */
+    private int capacidad;
+    private int ocupacion =0;
     public ListaEnvios(int capacidad) {
-		
+        this.capacidad = capacidad;
+        this.envios = new Envio[capacidad];
 		
     }
+
     // TODO: Devuelve el número de envíos que hay en la lista
     public int getOcupacion() {
+        return ocupacion;
 
     }
     // TODO: ¿Está llena la lista de envíos?
     public boolean estaLlena() {
+        return ocupacion == capacidad;
 
     }
 	//TODO: Devuelve el envio dado un indice
     public Envio getEnvio(int i) {
-        return null;
+        return envios[i];
     }
 
     /**
@@ -41,8 +48,13 @@ public class ListaEnvios {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarEnvio(Envio envio) {
-
-        return false;
+        boolean seCumple = false;
+        if (!estaLlena()) {
+            envios[ocupacion] = envio;
+            ocupacion++;
+            seCumple = true;
+        }
+        return seCumple;
     }
 
     /**
@@ -84,7 +96,11 @@ public class ListaEnvios {
      * en el enunciado
      */
     public void listarEnvios() {
-
+        for (Envio envio1 : envios) {
+            if (envio1 != null) {
+                System.out.println(envio1.toString());
+            }
+        }
     }
 
     /**

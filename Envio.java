@@ -6,8 +6,8 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author
- * @author
+ * @author Isabella Arévalo
+ * @author Sara Galinova
  * @version     1.0
  */
 public class Envio {
@@ -65,6 +65,8 @@ public class Envio {
     }
     // TODO: Cancela este envío, eliminándolo de la lista de envíos del porte y del cliente correspondiente
     public boolean cancelar() {
+        boolean cancelado = cliente.cancelarEnvio(localizador) && porte.desocuparHueco(localizador);
+        return cancelado;
 
     }
 
@@ -137,6 +139,15 @@ public class Envio {
      * @return Envio para el porte y cliente especificados
      */
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
+        Envio envio = null;
+        int fila, columna;
+        char letraColumna;
+        double precio;
+        if (envio.cliente.maxEnviosAlcanzado()){
+
+        }
+
+
 
 
 

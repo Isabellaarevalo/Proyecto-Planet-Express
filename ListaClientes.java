@@ -5,8 +5,8 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author
- * @author
+ * @author Isabella Arévalo
+ * @author Sara Galinova
  * @version     1.0
  */
 public class ListaClientes {
@@ -17,9 +17,11 @@ public class ListaClientes {
      *
      * @param capacidad
      */
+    private int capacidad;
+    private int ocupacion=0;
     public ListaClientes(int capacidad) {
-        
-		
+        this.capacidad = capacidad;
+        this.clientes = new Cliente[capacidad];
 		
     }
     // TODO: Devuelve el número de clientes que hay en la lista de clientes
