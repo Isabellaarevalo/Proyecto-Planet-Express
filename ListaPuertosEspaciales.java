@@ -15,22 +15,29 @@ public class ListaPuertosEspaciales {
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
      * @param capacidad
+     * @param ocupacion
      */
+    private int capacidad;
+    private int ocupacion;
     public ListaPuertosEspaciales(int capacidad) {
+        this.capacidad = capacidad;
+        this.lista = new PuertoEspacial[capacidad];
         
 		
     }
     // TODO: Devuelve el número de puertos espaciales que hay en la lista
     public int getOcupacion() {
+        return ocupacion;
 
     }
     // TODO: ¿Está llena la lista?
     public boolean estaLlena() {
+        return capacidad == ocupacion;
 
     }
 	// TODO: Devuelve un puerto espacial dado un indice
     public PuertoEspacial getPuertoEspacial(int i) {
-        return null;
+        return lista[i];
     }
 
     /**
@@ -39,8 +46,13 @@ public class ListaPuertosEspaciales {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarPuertoEspacial(PuertoEspacial puertoEspacial) {
-
-        return false;
+        boolean correcto = false;
+        if (!estaLlena()) {
+            lista[ocupacion] = puertoEspacial;
+            correcto = true;
+            ocupacion++;
+        }
+        return correcto;
     }
 
     /**
@@ -49,8 +61,17 @@ public class ListaPuertosEspaciales {
      * @return Puerto espacial que encontramos o null si no existe
      */
     public PuertoEspacial buscarPuertoEspacial(String codigo) {
-
-        return null;
+        PuertoEspacial puertoEspacial = null;
+        boolean seCumple = false;
+        int i = 0;
+        while (i < ocupacion && !seCumple) {
+            if (lista[i].getCodigo().equals(codigo)) {
+                puertoEspacial= getPuertoEspacial(i);
+                seCumple = true;
+            }
+            i++;
+        }
+        return puertoEspacial;
     }
 
     /**
@@ -63,8 +84,15 @@ public class ListaPuertosEspaciales {
      */
     public PuertoEspacial seleccionarPuertoEspacial(Scanner teclado, String mensaje) {
         PuertoEspacial puertoEspacial = null;
-
-
+        String codigo;
+        do {
+            System.out.print(mensaje);
+            codigo = teclado.next();
+            puertoEspacial = buscarPuertoEspacial(codigo);
+            if (puertoEspacial == null) {
+                System.out.println("Código de puerto espacial no encontrado.");
+            }
+        } while (puertoEspacial == null);
         return puertoEspacial;
     }
 

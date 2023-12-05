@@ -1,5 +1,4 @@
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -111,10 +110,17 @@ public class ListaPortes {
      * @return
      */
     public Porte seleccionarPorte(Scanner teclado, String mensaje, String cancelar) {
-        listarPortes();
-        Porte porte = null;
-
-        return porte;
+        Porte porteAct = null;
+        String id;
+        do {
+            System.out.print(mensaje);
+            id = teclado.next();
+            porteAct = buscarPorte(id);
+            if (porteAct == null) {
+                System.out.println("Código de aeropuerto no encontrado.");
+            }
+        } while (porteAct == null);
+        return porteAct;
     }
 
     /**
@@ -142,12 +148,29 @@ public class ListaPortes {
      * @return
      */
     public static ListaPortes leerPortesCsv(String fichero, int capacidad, ListaPuertosEspaciales puertosEspaciales, ListaNaves naves) {
+        BufferedReader entrada = null;
         ListaPortes listaPortes = new ListaPortes(capacidad);
         try {
-
-        } catch (Exception e) {
-            return null;
-        }
+            entrada = new BufferedReader(new FileReader(fichero));
+            String linea;
+            while ((linea = entrada.readLine())!=null){
+                String[] dato = linea.split(";");
+                Porte porte = new Porte (dato[0], dato[1], dato[2], Integer.parseInt(dato[3]), dato[4], dato[5], Integer.parseInt(dato[6]), dato[7], Double.parseDouble(dato[8]));
+                listaPortes.insertarPorte(porte);
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("Fichero portes no encontrado.");
+        } catch(IOException ex){
+            System.out.println("Error de lectura de fichero porte.");
+        } finally {
+            try{
+                if(entrada !=null) {
+                    entrada.close();
+                }
+        } catch(IOException ex){
+             System.out.println("Error de cierre de fichero Vuelos.");
+                }
+            }
         return listaPortes;
     }
-}
+    }
