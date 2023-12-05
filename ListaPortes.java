@@ -15,20 +15,24 @@ public class ListaPortes {
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
      * @param capacidad
+     * @param ocupación
      */
     private int capacidad;
     private int ocupacion=0;
     public ListaPortes(int capacidad) {
+        this.capacidad = capacidad;
+        this.portes = new Porte[capacidad];
         
 		
 		
     }
     // TODO: Devuelve el número de portes que hay en la lista
     public int getOcupacion() {
-
+        return ocupacion;
     }
     // TODO: ¿Está llena la lista?
     public boolean estaLlena() {
+        return capacidad==ocupacion;
 
     }
 
@@ -44,8 +48,13 @@ public class ListaPortes {
      * @return false en caso de estar llena la lista o de error
      */
     public boolean insertarPorte(Porte porte) {
-
-        return false;
+        boolean seCumple = false;
+        if (!estaLlena()) {
+            portes[ocupacion] = porte;
+            ocupacion++;
+            seCumple = true;
+        }
+        return seCumple;
     }
 
 

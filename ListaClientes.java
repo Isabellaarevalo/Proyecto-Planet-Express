@@ -16,6 +16,7 @@ public class ListaClientes {
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
      * @param capacidad
+     * @param ocupacion
      */
     private int capacidad;
     private int ocupacion=0;

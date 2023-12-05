@@ -139,12 +139,11 @@ public class Porte {
                 if (!huecos[i][j]) {
                     ocuparHueco(envio);
                     return true;
-                } else {
-                    return false;
+                }
                 }
             }
+        return false;
         }
-    }
 
 
     /**
@@ -214,19 +213,27 @@ public class Porte {
      *     10[ ][ ][ ]
      */
     public void imprimirMatrizHuecos() {
-        int columnas=0, filas=0;
-        for (filas = 0; filas <= nave.getFilas(); filas++) {
-            for (columnas = 0; columnas < nave.getColumnas(); columnas++) {
-                if (filas == 0 && columnas == 0) {
-                    System.out.println(" ");
-                } else {
-                    //not sure
+        int columnas = nave.getFilas();
+        int filas = nave.getColumnas();
+        for (int i=1; i<=filas; filas++) {
+            char letra = (char)(64+i);
+            System.out.println(" "+letra);
+        }
+        System.out.println();
+        for (int i=1; i<=filas; columnas++){
+            System.out.println(i);
+            for (int j=1; j<=columnas; columnas++){
+                char ocupado = ' ';
+                if (huecoOcupado(i, j)){
+                    ocupado = 'X';
+                }
+                if (i==1 || i<=10){
+                    System.out.println("["+ocupado+"]");
                 }
             }
         }
-        if (filas >= 1 && filas <= nave.getFilas() && columnas != 0)
-            System.out.print("[ ]");
-    }
+        System.out.println();
+                }
 
 
 

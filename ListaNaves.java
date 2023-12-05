@@ -4,8 +4,8 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author
- * @author
+ * @author Isabella Arévalo
+ * @author Sara Galinova
  * @version     1.0
  */
 public class ListaNaves {
@@ -15,23 +15,29 @@ public class ListaNaves {
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
      * @param capacidad
+     * @param ocupacion
      */
+    private int capacidad;
+    private int ocupacion;
     public ListaNaves(int capacidad) {
-        
-		
+        this.capacidad = capacidad;
+        this.naves = new Nave[capacidad];
 		
     }
+
     // TODO: Devuelve el número de naves que hay en la lista
     public int getOcupacion() {
+        return ocupacion;
 
     }
     // TODO: ¿Está llena la lista de naves?
     public boolean estaLlena() {
+        return capacidad == ocupacion;
 
     }
 	// TODO: Devuelve nave dado un indice
     public Nave getNave(int posicion) {
-        return null;
+        return naves[posicion];
     }
 
     /**
@@ -40,9 +46,13 @@ public class ListaNaves {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarNave(Nave nave) {
-
-
-        return false;
+        boolean seCumple = false;
+        if (!estaLlena()) {
+            naves[ocupacion] = nave;
+            ocupacion++;
+            seCumple = true;
+        }
+        return seCumple;
     }
     /**
      * TODO: Buscamos la nave a partir de la matricula pasada como parámetro
@@ -50,8 +60,17 @@ public class ListaNaves {
      * @return la nave que encontramos o null si no existe
      */
     public Nave buscarNave(String matricula) {
-
-        return null;
+        Nave naveAct = null;
+        boolean seCumple = false;
+        int i = 0;
+        while (i < ocupacion && !seCumple) {
+            if (naves[i].getMatricula().equals(matricula)) {
+                naveAct = naves[i];
+                seCumple = true;
+            }
+            i++;
+        }
+        return naveAct;
     }
     // TODO: Muestra por pantalla las naves de la lista con el formato indicado en el enunciado
     public void mostrarNaves() {
