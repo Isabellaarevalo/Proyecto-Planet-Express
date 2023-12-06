@@ -154,12 +154,16 @@ public class Porte {
      */
     public boolean desocuparHueco(String localizador) {
         //LOCALIZAR ENVIO, IDENTIFICAR FILAS Y COLUMNAS, FALSE ESA POSICION
-        buscarEnvio(localizador);
-        //if (){
-        return false;
+        Envio envio = buscarEnvio(localizador);
+        int fila = envio.getFila();
+        int columna = envio.getColumna();
+        if (huecoOcupado(fila, columna)){
+            return false;
+        } else{
+        return true;
+        }
 
     }
-
     /**
      * TODO: Devuelve una cadena con información completa del porte
      *
