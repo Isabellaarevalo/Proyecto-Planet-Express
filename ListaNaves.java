@@ -74,9 +74,12 @@ public class ListaNaves {
     }
     // TODO: Muestra por pantalla las naves de la lista con el formato indicado en el enunciado
     public void mostrarNaves() {
-
+        for (Nave nave : naves) {
+            if (nave != null) {
+                System.out.println(nave.toString());
+            }
+        }
     }
-
 
 
     /**
@@ -90,9 +93,18 @@ public class ListaNaves {
      * @return
      */
     public Nave seleccionarNave(Scanner teclado, String mensaje, double alcance) {
+        //confirm el equals si lo de dentro de paréntesis está correcto
         Nave nave = null;
+        String matricula;
+        do {
+            System.out.print(mensaje);
+            matricula = teclado.next();
+            nave = buscarNave(matricula);
+            if (nave == null && !matricula.equals(matricula)) {
+                System.out.println("Matrícula de nave no encontrada.");
+            }
 
-
+        } while (nave == null && !matricula.equals(matricula));
         return nave;
     }
 
