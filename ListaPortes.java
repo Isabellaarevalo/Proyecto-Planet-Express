@@ -162,8 +162,10 @@ public class ListaPortes {
             Fecha fechaSalida, fechaLlegada;
             while ((linea = entrada.readLine())!=null){
                 String[] dato = linea.split(";");
-                fechaSalida = Fecha.fromString(dato[4]);
-                fechaLlegada = Fecha.fromString(dato[7]);
+                String[] campo = linea.split("/");
+                fechaSalida = new Fecha (Integer.parseInt(campo[0]), Integer.parseInt(campo[1]), Integer.parseInt(campo[2]));
+                fechaLlegada = new Fecha (Integer.parseInt(campo[0]), Integer.parseInt(campo[1]), Integer.parseInt(campo[2]));
+                //falta parte de hora
                 Porte porte = new Porte (dato[0], naves.buscarNave(dato[1]), puertosEspaciales.buscarPuertoEspacial(dato[2]),
                         Integer.parseInt(dato[3]), fechaSalida, puertosEspaciales.buscarPuertoEspacial(dato[5]),
                         Integer.parseInt(dato[6]), fechaLlegada, Double.parseDouble(dato[8]));
