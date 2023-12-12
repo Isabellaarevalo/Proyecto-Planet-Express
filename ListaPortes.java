@@ -137,7 +137,7 @@ public class ListaPortes {
      */
     public boolean escribirPortesCsv(String fichero) {
         try {
-
+//escribir matrícula porque es el único dato único de nave nave.getMatricula
             return true;
         } catch (FileNotFoundException e) {
             return false;
@@ -159,9 +159,14 @@ public class ListaPortes {
         try {
             entrada = new BufferedReader(new FileReader(fichero));
             String linea;
+            Fecha fechaSalida, fechaLlegada;
             while ((linea = entrada.readLine())!=null){
                 String[] dato = linea.split(";");
-                Porte porte = new Porte (dato[0], dato[1], dato[2], Integer.parseInt(dato[3]), dato[4], dato[5], Integer.parseInt(dato[6]), dato[7], Double.parseDouble(dato[8]));
+                fechaSalida = Fecha.fromString(dato[4]);
+                fechaLlegada = Fecha.fromString(dato[7]);
+                Porte porte = new Porte (dato[0], naves.buscarNave(dato[1]), puertosEspaciales.buscarPuertoEspacial(dato[2]),
+                        Integer.parseInt(dato[3]), fechaSalida, puertosEspaciales.buscarPuertoEspacial(dato[5]),
+                        Integer.parseInt(dato[6]), fechaLlegada, Double.parseDouble(dato[8]));
                 listaPortes.insertarPorte(porte);
             }
         } catch (FileNotFoundException ex) {
