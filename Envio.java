@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -104,7 +101,7 @@ public class Envio {
             salida.println("Cliente: "+cliente+", "+cliente.getEmail());
             salida.println("Hueco: "+fila+columna);
             salida.println("Precio: "+precio+" SSD");
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             salida.println("Error de escritura del fichero");
             return false;
         } finally {

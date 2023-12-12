@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -117,11 +120,24 @@ public class ListaNaves {
     public boolean escribirNavesCsv(String nombre) {
         PrintWriter pw = null;
         try {
+            pw = new PrintWriter(new FileWriter("naves.csv",true));
+            mostrarNaves();
+
 
             return true;
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            pw.println("Fichero naves.csv no encontrado.");
             return false;
-        } finally {
+        }catch(IOException e){
+            pw.println("Error de escritura en fichero naves.csv.");
+        }catch (IOException e){
+            pw.println("Error de cierre de fichero naves.csv.");
+        }
+        finally {
+            if(pw != null){
+                
+            }
+
 
         }
     }
