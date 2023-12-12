@@ -64,17 +64,17 @@ public class ListaPortes {
      * @return el objeto Porte que encontramos o null si no existe
      */
     public Porte buscarPorte(String id) {
-        Porte aeropuertoAct = null;
+        Porte aeropuerto = null;
         boolean seCumple = false;
         int i = 0;
         while (i < ocupacion && !seCumple) {
             if (portes[i].getID().equals(id)) {
-                aeropuertoAct=getPorte(i);
+                aeropuerto=getPorte(i);
                 seCumple = true;
             }
             i++;
         }
-        return aeropuertoAct;
+        return aeropuerto;
 
     }
 
@@ -165,16 +165,16 @@ public class ListaPortes {
                 listaPortes.insertarPorte(porte);
             }
         } catch (FileNotFoundException ex) {
-            System.out.println("Fichero portes no encontrado.");
+            System.out.println("Fichero Porte no encontrado.");
         } catch(IOException ex){
-            System.out.println("Error de lectura de fichero porte.");
+            System.out.println("Error de lectura de fichero Porte.");
         } finally {
             try{
                 if(entrada !=null) {
                     entrada.close();
                 }
         } catch(IOException ex){
-             System.out.println("Error de cierre de fichero Vuelos.");
+             System.out.println("Error de cierre de fichero Porte.");
                 }
             }
         return listaPortes;

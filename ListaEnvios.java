@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -63,17 +60,17 @@ public class ListaEnvios {
      * @return el envio que encontramos o null si no existe
      */
     public Envio buscarEnvio(String localizador) {
-        Envio envioAct = null;
+        Envio envio = null;
         boolean seCumple = false;
         int i = 0;
         while (i < ocupacion && !seCumple) {
             if (envios[i].getLocalizador().equals(localizador)) {
-                envioAct = envios[i];
+                envio = envios[i];
                 seCumple = true;
+                }
             }
             i++;
-        }
-        return envioAct;
+        return envio;
     }
 
     /**
@@ -84,10 +81,18 @@ public class ListaEnvios {
      * @return el envio que encontramos o null si no existe
      */
     public Envio buscarEnvio(String idPorte, int fila, int columna) {
+        Envio envio = null;
+        boolean seCumple = false;
+        int i = 0;
+        while (i < ocupacion && !seCumple) {
+            if (envios[i].getPorte().getID().equals(idPorte) && envios[i].getFila() == fila && envios[i].getColumna() == columna) {
+                envio = envios[i];
+                seCumple = true;
+            }
+            i++;
+        }
+        return envio;
 
-
-
-        return null;
     }
 
     /**
@@ -96,9 +101,18 @@ public class ListaEnvios {
      * @return True si se ha borrado correctamente, false en cualquier otro caso
      */
     public boolean eliminarEnvio (String localizador) {
-
-        return false;
-
+        int nOcupacion = 0;
+        boolean eliminado = false;
+        for (int i = 0; i < ocupacion; i++) {
+            if (!envios[i].getLocalizador().equals(localizador)) {
+                envios[nOcupacion] = envios[i];
+                nOcupacion++;
+            } else {
+                eliminado = true;
+            }
+        }
+        ocupacion = nOcupacion;
+        return eliminado;
     }
 
     /**
@@ -123,11 +137,18 @@ public class ListaEnvios {
      */
     public Envio seleccionarEnvio(Scanner teclado, String mensaje) {
         Envio envio = null;
+        String localizador;
+        do {
+            System.out.print(mensaje);
+            localizador = teclado.next();
+            envio = buscarEnvio(localizador);
+            if (envio == null) {
+                System.out.println("Localizador no encontrado.");
+            }
 
-
+        } while (envio == null);
         return envio;
     }
-
 
 
     /**
@@ -136,15 +157,24 @@ public class ListaEnvios {
      * @return
      */
     public boolean aniadirEnviosCsv(String fichero) {
+        //confirmar que no sobreescribe la información
         PrintWriter pw = null;
+        boolean escrito = true;
         try {
-
-            return true;
-        } catch (Exception e) {
-            return false;
+            pw = new PrintWriter(new FileWriter(fichero, true));
+            for (int i = 0; i < ocupacion; i++) {
+                pw.printf("%s;%s;%s;%S;%d;%d;%.1f\n",envios[i].getLocalizador(),envios[i].getPorte().getID(),
+                        envios[i].getCliente().getEmail(), envios[i].getFila(), envios[i].getColumna(), envios[i].getPrecio());
+            }
+        }catch(FileNotFoundException e){
+            System.out.println("Fichero Envios no encontrado.");
+        } catch (IOException ex) {
+            System.out.println("Error de escritura en fichero Envios.");
+            escrito = false;
         } finally {
-
+            if (pw != null) pw.close();
         }
+        return escrito;
     }
 
     /**

@@ -99,19 +99,19 @@ public class Envio {
             salida.println("Destino: "+porte.getDestino()+" "+porte.getMuelleDestino());
             salida.println("Llegada: "+porte.getLlegada());
             salida.println("Cliente: "+cliente+", "+cliente.getEmail());
-            salida.println("Hueco: "+fila+columna);
+            salida.println("Hueco: "+getHueco());
             salida.println("Precio: "+precio+" SSD");
-        } catch (IOException e) {
-            salida.println("Error de escritura del fichero");
-            return false;
-        } finally {
+        } catch (FileNotFoundException e) {
+            System.out.println("Fichero de factura no encontrado.");
+        } catch(IOException ex) {
+            System.out.println("Error de escritura en fichero de factura.");
+        }finally {
             if(salida != null){
-                return true;
+                salida.close();
             }
             return true;
         }
     }
-
 
 
     /**

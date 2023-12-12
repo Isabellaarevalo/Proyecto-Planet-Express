@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -103,14 +106,27 @@ public class ListaPuertosEspaciales {
      */
     public boolean escribirPuertosEspacialesCsv(String nombre) {
         PrintWriter pw = null;
+        PuertoEspacial puertoEspacial;
+        boolean escrito = true;
         try {
-
-            return true;
-        } catch (Exception e) {
-            return false;
+            pw = new PrintWriter(new FileWriter(nombre, false));
+            for (int i = 0; i < ocupacion; i++) {
+                puertoEspacial = lista[i];
+                pw.printf("%s;%s;%08d;%C;%s\n", puertoEspacial.getNombre(), puertoEspacial.getCodigo(),
+                        puertoEspacial.getRadio(), puertoEspacial.getAzimut(), puertoEspacial.getPolar(),
+                        puertoEspacial.getMuelles());
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Fichero Puertos no encontrado.");
+        } catch (IOException ex) {
+            System.out.println("Error de escritura en fichero Puertos.");
+            escrito = false;
         } finally {
-
+            if (pw != null) {
+                pw.close();
+            }
         }
+        return escrito;
     }
 
 
