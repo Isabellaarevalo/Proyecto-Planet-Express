@@ -79,7 +79,17 @@ public class ListaClientes {
      * @return
      */
     public Cliente seleccionarCliente(Scanner teclado, String mensaje) {
-
+        Cliente cliente = null;
+        String email;
+        do {
+            System.out.print(mensaje);
+            email = teclado.next();
+            cliente = buscarClienteEmail(email);
+            if (cliente == null) {
+                System.out.println("DNI no encontrado.");
+            }
+        } while (cliente == null);
+        return cliente;
     }
 
     /**

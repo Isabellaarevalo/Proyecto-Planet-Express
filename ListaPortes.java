@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -95,7 +96,12 @@ public class ListaPortes {
      * TODO: Muestra por pantalla los Portes siguiendo el formato de los ejemplos del enunciado
      */
     public void listarPortes() {
-
+        // confirm
+        for (Porte porte : Arrays.asList(portes)) {
+            if (porte != null) {
+                System.out.println(porte.toString());
+            }
+        }
     }
 
 
