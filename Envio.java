@@ -1,4 +1,6 @@
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
@@ -88,19 +90,28 @@ public class Envio {
      *     Precio: 13424,56 SSD
      */
     public boolean generarFactura(String fichero) {
+        //revisar hueco
         PrintWriter salida = null;
         try {
-
-
-
-
-
-
-
-
-            return true;
+            salida = new PrintWriter(new FileWriter(fichero));
+            salida.println("-----------------------------------------------------");
+            salida.println("--------- Factura del envío "+localizador+" ---------");
+            salida.println("-----------------------------------------------------");
+            salida.println("Porte: "+porte);
+            salida.println("Origen: "+ porte.getOrigen()+" "+porte.getMuelleOrigen());
+            salida.println("Destino: "+porte.getDestino()+" "+porte.getMuelleDestino());
+            salida.println("Llegada: "+porte.getLlegada());
+            salida.println("Cliente: "+cliente+", "+cliente.getEmail());
+            salida.println("Hueco: "+fila+columna);
+            salida.println("Precio: "+precio+" SSD");
         } catch (FileNotFoundException e) {
+            salida.println("Error de escritura del fichero");
             return false;
+        } finally {
+            if(salida != null){
+                return true;
+            }
+            return true;
         }
     }
 
