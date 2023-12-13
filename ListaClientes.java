@@ -116,9 +116,9 @@ public class ListaClientes {
                 salida.printf("%s;%s;%08d;%C;%s\n", cliente.getNombre(), cliente.getApellidos(), cliente.getEmail());
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Fichero Clientes no encontrado.");
+            System.out.println("Fichero de clientes no encontrado.");
         } catch (IOException ex) {
-            System.out.println("Error de escritura en fichero Clientes.");
+            System.out.println("Error de escritura en fichero de clientes.");
             escrito = false;
         } finally {
             if (salida != null) {
@@ -143,27 +143,22 @@ public class ListaClientes {
         try {
             entrada = new BufferedReader(new FileReader(fichero));
             String linea;
-            String nombre, apellidos, email;
-            Cliente cliente;
             while ((linea = entrada.readLine()) != null) {
-                String[] dato = linea.split(";");
-                nombre = dato[0];
-                apellidos = dato[1];
-                email = dato[2];
-                cliente = new Cliente(nombre, apellidos, email, maxEnviosPorCliente);
+                String [] dato = linea.split(";");
+                Cliente cliente = new Cliente (dato[0], dato[1], dato[2], Integer.parseInt(dato[4]));
                 listaClientes.insertarCliente(cliente);
             }
         } catch (FileNotFoundException ex) {
-            System.out.println("Fichero Clientes no encontrado.");
+            System.out.println("Fichero clientes no encontrado.");
         } catch (IOException ex) {
-            System.out.println("Error de lectura de fichero Clientes.");
+            System.out.println("Error de lectura de fichero clientes.");
         } finally {
             try {
                 if (entrada != null) {
                     entrada.close();
                 }
             } catch (IOException ex) {
-                System.out.println("Error de cierre de fichero Clientes.");
+                System.out.println("Error de cierre de fichero clientes.");
             }
         }
         return listaClientes;

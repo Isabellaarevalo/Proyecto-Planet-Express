@@ -159,29 +159,24 @@ public class ListaPortes {
         try {
             entrada = new BufferedReader(new FileReader(fichero));
             String linea;
-            Fecha fechaSalida, fechaLlegada;
             while ((linea = entrada.readLine())!=null){
                 String[] dato = linea.split(";");
-                String[] campo = linea.split("/");
-                fechaSalida = new Fecha (Integer.parseInt(campo[0]), Integer.parseInt(campo[1]), Integer.parseInt(campo[2]));
-                fechaLlegada = new Fecha (Integer.parseInt(campo[0]), Integer.parseInt(campo[1]), Integer.parseInt(campo[2]));
-                //falta parte de hora
                 Porte porte = new Porte (dato[0], naves.buscarNave(dato[1]), puertosEspaciales.buscarPuertoEspacial(dato[2]),
-                        Integer.parseInt(dato[3]), fechaSalida, puertosEspaciales.buscarPuertoEspacial(dato[5]),
-                        Integer.parseInt(dato[6]), fechaLlegada, Double.parseDouble(dato[8]));
+                        Integer.parseInt(dato[3]), Fecha.fromString(dato[4]), puertosEspaciales.buscarPuertoEspacial(dato[5]),
+                        Integer.parseInt(dato[6]), Fecha.fromString(dato[5]), Double.parseDouble(dato[8]));
                 listaPortes.insertarPorte(porte);
             }
         } catch (FileNotFoundException ex) {
-            System.out.println("Fichero Porte no encontrado.");
+            System.out.println("Fichero portes no encontrado.");
         } catch(IOException ex){
-            System.out.println("Error de lectura de fichero Porte.");
+            System.out.println("Error de lectura de fichero portes.");
         } finally {
             try{
                 if(entrada !=null) {
                     entrada.close();
                 }
         } catch(IOException ex){
-             System.out.println("Error de cierre de fichero Porte.");
+             System.out.println("Error de cierre de fichero portes.");
                 }
             }
         return listaPortes;

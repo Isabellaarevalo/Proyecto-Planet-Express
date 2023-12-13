@@ -167,9 +167,9 @@ public class ListaEnvios {
                         envios[i].getCliente().getEmail(), envios[i].getFila(), envios[i].getColumna(), envios[i].getPrecio());
             }
         }catch(FileNotFoundException e){
-            System.out.println("Fichero Envios no encontrado.");
+            System.out.println("Fichero de envíos no encontrado.");
         } catch (IOException ex) {
-            System.out.println("Error de escritura en fichero Envios.");
+            System.out.println("Error de escritura en fichero de envíos.");
             escrito = false;
         } finally {
             if (pw != null) pw.close();
@@ -184,13 +184,31 @@ public class ListaEnvios {
      * @param clientes
      */
     public static void leerEnviosCsv(String ficheroEnvios, ListaPortes portes, ListaClientes clientes) {
-        Scanner sc = null;
+        BufferedReader entrada = null;
+        //comprobar que el portes.getOcupacion() está bien ponerlo así
+        ListaEnvios listaEnvios = new ListaEnvios(portes.getOcupacion());
         try {
-
-        } catch (FileNotFoundException e) {
-            System.out.println("No se ha encontrado el fichero de envíos");
+                entrada = new BufferedReader(new FileReader(ficheroEnvios));
+                String linea;
+                while ((linea = entrada.readLine())!=null) {
+                    String [] dato = linea.split(";");
+                    Envio envio = new Envio (dato[0], portes.buscarPorte(dato[1]),
+                            clientes.buscarClienteEmail(dato[2]), Integer.parseInt(dato[3]),
+                            Integer.parseInt(dato[4]), Double.parseDouble(dato[5]));
+                    listaEnvios.insertarEnvio(envio);
+                }
+        } catch (FileNotFoundException ex) {
+            System.out.println("Fichero envíos no encontrado.");
+        } catch (IOException ex) {
+            System.out.println("Error de lectura de fichero envíos.");
         } finally {
-
+            try {
+                if (entrada != null) {
+                    entrada.close();
+                }
+            } catch (IOException ex) {
+                System.out.println("Error de cierre de fichero envíos.");
+            }
         }
     }
 }
