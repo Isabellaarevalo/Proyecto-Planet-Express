@@ -1,7 +1,4 @@
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -117,9 +114,9 @@ public class ListaPuertosEspaciales {
                         puertoEspacial.getMuelles());
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Fichero Puertos no encontrado.");
+            System.out.println("Fichero puertosEspaciales no encontrado.");
         } catch (IOException ex) {
-            System.out.println("Error de escritura en fichero Puertos.");
+            System.out.println("Error de escritura en fichero puertosEspaciales.");
             escrito = false;
         } finally {
             if (pw != null) {
@@ -139,13 +136,28 @@ public class ListaPuertosEspaciales {
      */
     public static ListaPuertosEspaciales leerPuertosEspacialesCsv(String fichero, int capacidad) {
         ListaPuertosEspaciales listaPuertosEspaciales = new ListaPuertosEspaciales(capacidad);
-        Scanner sc = null;
+        BufferedReader entrada = null;
         try {
-
-        } catch (Exception e) {
-            return null;
+            entrada = new BufferedReader(new FileReader(fichero));
+            String linea;
+            while ((linea = entrada.readLine()) != null) {
+                String[] dato = linea.split(";");
+                PuertoEspacial puertoEspacial = new PuertoEspacial(dato[0], dato[1], Double.parseDouble(dato[2]),
+                        Double.parseDouble(dato[3]), Double.parseDouble(dato[4]), Integer.parseInt(dato[5]));
+                listaPuertosEspaciales.insertarPuertoEspacial(puertoEspacial);
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("Fichero puertosEspaciales no encontrado.");
+        } catch (IOException ex) {
+            System.out.println("Error de lectura de fichero puertosEspaciales.");
         } finally {
-
+            try{
+                if(entrada !=null) {
+                    entrada.close();
+                }
+            } catch(IOException ex){
+                System.out.println("Error de cierre de fichero puertosEspaciales.");
+            }
         }
         return listaPuertosEspaciales;
     }

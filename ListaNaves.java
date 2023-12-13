@@ -1,7 +1,4 @@
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -151,13 +148,29 @@ public class ListaNaves {
      */
     public static ListaNaves leerNavesCsv(String fichero, int capacidad) {
         ListaNaves listaNaves = new ListaNaves(capacidad);
-        Scanner sc = null;
+        BufferedReader entrada = null;
         try {
+            entrada = new BufferedReader(new FileReader(fichero));
+            String linea;
+            while ((linea = entrada.readLine()) != null) {
+                String [] dato = linea.split(";");
+                Nave nave = new Nave (dato[0], dato[1], dato[2], Integer.parseInt(dato[3]),
+                        Integer.parseInt(dato[4]), Double.parseDouble(dato[5]));
+                listaNaves.insertarNave(nave);
+            }
 
-        } catch (Exception e) {
-            return null;
+        } catch (FileNotFoundException ex) {
+            System.out.println("Fichero clientes no encontrado.");
+        } catch (IOException ex) {
+            System.out.println("Error de lectura de fichero clientes.");
         } finally {
-
+            try {
+                if (entrada != null) {
+                    entrada.close();
+                }
+            } catch (IOException ex) {
+                System.out.println("Error de cierre de fichero clientes.");
+            }
         }
         return listaNaves;
     }
