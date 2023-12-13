@@ -158,7 +158,6 @@ public class ListaNaves {
                         Integer.parseInt(dato[4]), Double.parseDouble(dato[5]));
                 listaNaves.insertarNave(nave);
             }
-
         } catch (FileNotFoundException ex) {
             System.out.println("Fichero clientes no encontrado.");
         } catch (IOException ex) {

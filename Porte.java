@@ -250,10 +250,18 @@ public class Porte {
     public boolean generarListaEnvios(String fichero) {
         PrintWriter salida = null;
         try {
-            salida = new PrintWriter(new FileWriter(fichero));
-            salida.println("--------------------------------------------------");
-            salida.println("-------- Lista de envíos del porte"+id+"--------");
-            salida.println("--------------------------------------------------");
+            salida = new PrintWriter(new PrintWriter(fichero));
+            salida.println("-------------------------------------------------------------------------\n");
+            salida.println("--------- Lista del envío "+id+" ---------");
+            salida.println("-------------------------------------------------------------------------\n");
+            salida.println("Porte:"+id);
+            salida.println("Origen:");
+            salida.println("Destino:");
+            salida.println("Salida:"+salida);
+            salida.println("Llegada:"+llegada);
+            salida.println("Cliente:");
+            salida.println("Hueco:"+huecos);
+            salida.println("Precio: "+precio+" SSD" );
         } catch (FileNotFoundException e) {
             System.out.println("Error de escritura del fichero");
             return false;
