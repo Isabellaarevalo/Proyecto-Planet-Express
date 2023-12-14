@@ -36,7 +36,11 @@ public class ListaEnvios {
     }
 	//TODO: Devuelve el envio dado un indice
     public Envio getEnvio(int i) {
-        return envios[i];
+        Envio envio = null;
+        if (i<=ocupacion){
+            envio = envios[i];
+    }
+            return envio;
     }
 
     /**

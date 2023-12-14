@@ -98,7 +98,7 @@ public class Envio {
             salida.println("Origen: "+ porte.getOrigen()+" "+porte.getMuelleOrigen());
             salida.println("Destino: "+porte.getDestino()+" "+porte.getMuelleDestino());
             salida.println("Llegada: "+porte.getLlegada());
-            salida.println("Cliente: "+cliente+", "+cliente.getEmail());
+            salida.println("Cliente: "+cliente.getNombre()+" "+cliente.getApellidos()+", "+cliente.getEmail());
             salida.println("Hueco: "+getHueco());
             salida.println("Precio: "+precio+" SSD");
         } catch (FileNotFoundException e) {

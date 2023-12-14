@@ -250,25 +250,25 @@ public class Porte {
      * @return
      */
     public boolean generarListaEnvios(String fichero) {
-        PrintWriter salida = null;
+        PrintWriter salida1 = null;
         try {
-            salida = new PrintWriter(new PrintWriter(fichero));
-            salida.println("-------------------------------------------------------------------------\n");
-            salida.println("--------- Lista del envío "+id+" ---------");
-            salida.println("-------------------------------------------------------------------------\n");
-            salida.println("Porte:"+id);
-            salida.println("Origen:");
-            salida.println("Destino:");
-            salida.println("Salida:"+salida);
-            salida.println("Llegada:"+llegada);
-            salida.println("Cliente:");
-            salida.println("Hueco:"+huecos);
-            salida.println("Precio: "+precio+" SSD" );
+            salida1 = new PrintWriter(new PrintWriter(fichero));
+            salida1.println("-------------------------------------------------------------------------");
+            salida1.println("--------- Lista de envíos del porte "+id+" ---------");
+            salida1.println("-------------------------------------------------------------------------");
+            salida1.println("Hueco Cliente");
+            //arreglar esto de clientes (for)
+            for (int i=0; i<= huecos.length-1; i++ ) {
+                for (int j = 0; j <= huecos.length-1; j++) {
+                    salida1.printf("%s \t \t \t%s %s, %s", buscarEnvio(i, j).getHueco(), buscarEnvio(i, j).getCliente().getNombre(),
+                            buscarEnvio(i, j).getCliente().getApellidos(), buscarEnvio(i, j).getCliente().getEmail());
+                }
+            }
         } catch (FileNotFoundException e) {
             System.out.println("Error de escritura del fichero");
             return false;
         } finally {
-            if (salida!=null){
+            if (salida1!=null){
                 return true;
             }
         }
