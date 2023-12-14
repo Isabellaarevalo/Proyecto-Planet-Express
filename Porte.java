@@ -47,7 +47,8 @@ public class Porte {
         this.muelleDestino = muelleDestino;
         this.llegada = llegada;
         this.precio = precio;
-
+        huecos = new boolean[nave.getFilas()][nave.getColumnas()];
+        listaEnvios = new ListaEnvios(nave.getFilas() * nave.getColumnas());
     }
 
     public String getID() {
@@ -183,6 +184,7 @@ public class Porte {
      *
      * @return ejemplo del formato -> "Porte PM0066 de GGT M5 (01/01/2023 08:15:00) a CID M1 (01/01/2024 11:00:05)"
      */
+    //revisar campo de fecha
     public String toStringSimple() {
         return "Porte" + id + " de " + origen.getCodigo() + " " + muelleOrigen + "(" + salida + ") a " +
                 "" + destino.getCodigo() + " " + muelleDestino + " (" + llegada;
