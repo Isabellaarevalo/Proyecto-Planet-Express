@@ -136,30 +136,13 @@ public class ListaPortes {
      * @return
      */
     public boolean escribirPortesCsv(String fichero) {
-        PrintWriter salida = null;
-        Porte porte;
-        boolean escrito = true;
         try {
-            salida = new PrintWriter(new FileWriter(fichero, false));
-            for (int i = 0; i < ocupacion; i++) {
-                porte = portes[i];
-                salida.printf("%s;%s;%08d;%C;%s\n", porte.getID(), porte.getNave().getMatricula(), porte.getOrigen(),
-                        porte.getMuelleOrigen(), porte.getSalida(), porte.getDestino(), porte.getMuelleDestino(),
-                        porte.getLlegada(), porte.getPrecio());
-            }
+//escribir matrícula porque es el único dato único de nave nave.getMatricula
+            return true;
         } catch (FileNotFoundException e) {
-            System.out.println("Fichero de portes no encontrado.");
-        } catch (IOException ex) {
-            System.out.println("Error de portes en fichero de clientes.");
-            escrito = false;
-        } finally {
-            if (salida != null) {
-                salida.close();
-            }
+            return false;
         }
-        return escrito;
     }
-
 
     /**
      * TODO: Genera una lista de Portes a partir del fichero CSV, usando los límites especificados como argumentos para

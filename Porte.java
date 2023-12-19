@@ -309,6 +309,16 @@ public class Porte {
                                   ListaPuertosEspaciales puertosEspaciales,
                                   ListaNaves naves,
                                   ListaPortes portes) {
+        String codigoOrigen,codigoDestino;
+        do {System.out.println("Ingrese código de puerto Origen: ");
+         codigoOrigen= teclado.nextLine();}
+        while(codigoOrigen=);
+        do {System.out.println("Ingrese código de puerto Destino: ");
+            codigoDestino= teclado.nextLine();}
+        while(codigoDestino=);
+
+
+
 
         // do while (
         return null;
