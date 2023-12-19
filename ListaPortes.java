@@ -87,7 +87,11 @@ public class ListaPortes {
      * @return
      */
     public ListaPortes buscarPortes(String codigoOrigen, String codigoDestino, Fecha fecha) {
-        
+
+
+
+
+
 
         return listaPortes;
     }
@@ -136,7 +140,12 @@ public class ListaPortes {
      * @return
      */
     public boolean escribirPortesCsv(String fichero) {
+        PrintWriter pw =null;
         try {
+            pw = new PrintWriter(new FileWriter("portes.csv",true));
+            pw.println();
+
+
 //escribir matrícula porque es el único dato único de nave nave.getMatricula
             return true;
         } catch (FileNotFoundException e) {
