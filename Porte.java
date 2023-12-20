@@ -305,6 +305,7 @@ public class Porte {
      * @param portes
      * @return
      */
+    //falta por terminar
     public static Porte altaPorte(Scanner teclado, Random rand,
                                   ListaPuertosEspaciales puertosEspaciales,
                                   ListaNaves naves,

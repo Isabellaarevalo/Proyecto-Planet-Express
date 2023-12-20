@@ -87,8 +87,20 @@ public class ListaPortes {
      * @return
      */
     public ListaPortes buscarPortes(String codigoOrigen, String codigoDestino, Fecha fecha) {
-        return ListaPortes;
-    }
+        //confirmar el error aquí
+        ListaPortes listaPortes = null;
+        boolean seCumple = false;
+        int i = 0;
+        while (i < ocupacion && !seCumple) {
+            if (portes[i].getOrigen().equals(codigoOrigen) && portes[i].getDestino().equals(codigoDestino)
+                    && portes[i].getLlegada()==fecha) {
+                listaPortes = portes[i];
+                seCumple = true;
+            }
+            i++;
+        }
+        return listaPortes;
+        }
 
     /**
      * TODO: Muestra por pantalla los Portes siguiendo el formato de los ejemplos del enunciado
