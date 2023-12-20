@@ -87,13 +87,7 @@ public class ListaPortes {
      * @return
      */
     public ListaPortes buscarPortes(String codigoOrigen, String codigoDestino, Fecha fecha) {
-
-
-
-
-
-
-        return listaPortes;
+        return ListaPortes;
     }
 
     /**
@@ -140,17 +134,28 @@ public class ListaPortes {
      * @return
      */
     public boolean escribirPortesCsv(String fichero) {
-        PrintWriter pw =null;
+        PrintWriter salida = null;
+        Porte porte;
+        boolean escrito = true;
         try {
-            pw = new PrintWriter(new FileWriter("portes.csv",true));
-            pw.println();
-
-
-//escribir matrícula porque es el único dato único de nave nave.getMatricula
-            return true;
+            salida = new PrintWriter(new FileWriter(fichero, false));
+            for (int i = 0; i < ocupacion; i++) {
+                porte = portes[i];
+                salida.printf("%s;%s;%08d;%C;%s\n", porte.getID(), porte.getNave().getMatricula(), porte.getOrigen(),
+                        porte.getMuelleOrigen(), porte.getSalida(), porte.getDestino(), porte.getMuelleDestino(),
+                        porte.getLlegada(), porte.getPrecio());
+            }
         } catch (FileNotFoundException e) {
-            return false;
+            System.out.println("Fichero de clientes no encontrado.");
+        } catch (IOException ex) {
+            System.out.println("Error de escritura en fichero de clientes.");
+            escrito = false;
+        } finally {
+            if (salida != null) {
+                salida.close();
+            }
         }
+        return escrito;
     }
 
     /**

@@ -115,11 +115,18 @@ public class ListaNaves {
      * @return
      */
     public boolean escribirNavesCsv(String nombre) {
+        // falta añadir error de cierre de fichero
         PrintWriter pw = null;
+        Nave nave;
+        boolean escrito = true;
         try {
             pw = new PrintWriter(new FileWriter("naves.csv",true));
+            for (int i = 0; i < ocupacion; i++) {
+                nave = naves[i];
+                pw.printf("%s;%s;%08d;%C;%s\n", nave.getMarca(), nave.getModelo(), nave.getMatricula(),
+                        nave.getFilas(), nave.getColumnas(), nave.getAlcance());
+            }
             mostrarNaves();
-
 
             return true;
         } catch (FileNotFoundException e) {
@@ -127,15 +134,12 @@ public class ListaNaves {
             return false;
         }catch(IOException e){
             pw.println("Error de escritura en fichero naves.csv.");
-        }catch (IOException e){
-            pw.println("Error de cierre de fichero naves.csv.");
         }
         finally {
             if(pw != null){
-                
+                pw.close();
             }
-
-
+            return escrito;
         }
     }
 

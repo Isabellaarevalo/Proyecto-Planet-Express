@@ -106,6 +106,7 @@ public class ListaClientes {
      * @return
      */
     public boolean escribirClientesCsv(String fichero) {
+        //falta añadir error de cierre de fichero
         PrintWriter salida = null;
         Cliente cliente;
         boolean escrito = true;
@@ -123,7 +124,7 @@ public class ListaClientes {
         } finally {
             if (salida != null) {
                 salida.close();
-            }
+                }
         }
         return escrito;
     }
