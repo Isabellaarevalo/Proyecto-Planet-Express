@@ -79,10 +79,10 @@ public class Cliente {
      * TODO: Método estático para crear un nuevo cliente "no repetido", se pide por teclado los datos necesarios
      * al usuario en el orden y con los textos indicados en los ejemplos de ejecución del enunciado
      * La función tiene que solicitar repetidamente los parámetros hasta que sean correctos
-     * @param teclado
-     * @param clientes
-     * @param maxEnvios
-     * @return Cliente
+     * @param teclado Lee los datos introducidos por el usuario.
+     * @param clientes Contiene la lista con los clientes ya existentes.
+     * @param maxEnvios La cantidad máxima de envíos por cliente.
+     * @return Cliente Crea a un nuevo cliente con nombre,apellidos y email únicos,y el máximo de envíos.
      */
     public static Cliente altaCliente(Scanner teclado, ListaClientes clientes, int maxEnvios) {
         String nombre, apellidos, email;
@@ -112,8 +112,8 @@ public class Cliente {
 
     /**
      * TODO: Metodo para comprobar que el formato de email introducido sea correcto
-     * @param email
-     * @return
+     * @param email del usuario que hay que comrpobar.
+     * @return Devuelve correcto si el email introducido por el usuario tiene el formato.
      */
     public static boolean correctoEmail(String email) {
         boolean correcto = false;

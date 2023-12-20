@@ -23,7 +23,7 @@ public class Envio {
      *
      * @param localizador único del envío, formado por el id del porte y 9 letras mayúsculas.
      * @param porte asociado a cada envío de tipo Porte.
-     * @param cliente es quíen contrata el envío, y es de tipo Cliente.
+     * @param cliente Es quíen contrata el envío, y es de tipo Cliente.
      * @param fila del hueco en el que se encuentra el envío en la matriz de Porte.
      * @param columna del hueco en el que se encuentra el envío en la matriz de Porte.
      * @param precio del envío.
@@ -120,7 +120,7 @@ public class Envio {
      *   NOTA: Usar el objeto rand pasado como argumento para la parte aleatoria.
      * @param rand genera números aleatorios, utilizados para generar las 9 mayúsculas aleatorias.
      * @param idPorte identificador del porte de 6 caracteres.
-     * @return
+     * @return devuelve el localizador formado al concatenar las mayúsculas generadas por rand, y el id del porte.
      */
     public static String generarLocalizador(Random rand, String idPorte) {
         StringBuilder localizador = new StringBuilder(idPorte);
@@ -140,10 +140,10 @@ public class Envio {
      * TODO: Método para crear un nuevo envío para un porte y cliente específico, pidiendo por teclado los datos
      *  necesarios al usuario en el orden y con los textos indicados en los ejemplos de ejecución del enunciado
      *  La función solicita repetidamente los parámetros hasta que sean correctos
-     * @param teclado
+     * @param teclado lee los datos pro porcionados por el usuario.
      * @param rand
-     * @param porte
-     * @param cliente
+     * @param porte para el cual se crea el envío.
+     * @param cliente que contrata el envío.
      * @return Envio para el porte y cliente especificados
      */
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {

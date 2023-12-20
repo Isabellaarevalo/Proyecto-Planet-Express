@@ -14,8 +14,8 @@ public class ListaClientes {
     /**
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
-     * @param capacidad
-     * @param ocupacion
+     * @param capacidad de la lista de clientes.
+     * @param ocupacion numero de clientes en la lista de clientes.
      */
     private int capacidad;
     private int ocupacion = 0;
@@ -80,9 +80,9 @@ public class ListaClientes {
      *  para la solicitud y, siguiendo el orden y los textos mostrados en el enunciado.
      *  La función debe solicitar repetidamente hasta que se introduzca un email correcto
      *
-     * @param teclado
-     * @param mensaje
-     * @return
+     * @param teclado lee el email introducido por el usuario.
+     * @param mensaje solicita al usuario que introduzca el email.
+     * @return devuelve el cliente encontrado a partir del email.
      */
     public Cliente seleccionarCliente(Scanner teclado, String mensaje) {
         Cliente cliente = null;
@@ -92,7 +92,7 @@ public class ListaClientes {
             email = teclado.next();
             cliente = buscarClienteEmail(email);
             if (cliente == null) {
-                System.out.println("DNI no encontrado.");
+                System.out.println("Email no encontrado.");
             }
         } while (cliente == null);
         return cliente;
@@ -102,8 +102,8 @@ public class ListaClientes {
      * TODO: Método para guardar la lista de clientes en un fichero .csv, sobreescribiendo la información del mismo
      *  fichero
      *
-     * @param fichero
-     * @return
+     * @param fichero Nombre del fichero.
+     * @return escribe en el fichero los clientes.
      */
     public boolean escribirClientesCsv(String fichero) {
         //falta añadir error de cierre de fichero
@@ -133,10 +133,10 @@ public class ListaClientes {
      * TODO: Genera una lista de Clientes a partir del fichero CSV, usando los límites especificados como argumentos
      *  para la capacidad de la lista y el número de billetes máximo por pasajero
      *
-     * @param fichero
-     * @param capacidad
-     * @param maxEnviosPorCliente
-     * @return lista de clientes
+     * @param fichero Nombre del fichero.
+     * @param capacidad de la Lista de Clientes.
+     * @param maxEnviosPorCliente máximo número de envíos por cliente.
+     * @return lista de clientes.
      */
     public static ListaClientes leerClientesCsv(String fichero, int capacidad, int maxEnviosPorCliente) {
         BufferedReader entrada = null;
