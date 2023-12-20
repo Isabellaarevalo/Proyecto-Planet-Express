@@ -111,7 +111,7 @@ public class ListaClientes {
         Cliente cliente;
         boolean escrito = true;
         try {
-            salida = new PrintWriter(new FileWriter(fichero, false));
+            salida = new PrintWriter(new FileWriter(fichero, true));
             for (int i = 0; i < ocupacion; i++) {
                 cliente = clientes[i];
                 salida.printf("%s;%s;%08d;%C;%s\n", cliente.getNombre(), cliente.getApellidos(), cliente.getEmail());

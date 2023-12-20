@@ -120,28 +120,25 @@ public class ListaNaves {
         Nave nave;
         boolean escrito = true;
         try {
-            pw = new PrintWriter(new FileWriter("naves.csv",true));
+            pw = new PrintWriter(new FileWriter("naves.csv", true));
             for (int i = 0; i < ocupacion; i++) {
                 nave = naves[i];
                 pw.printf("%s;%s;%08d;%C;%s\n", nave.getMarca(), nave.getModelo(), nave.getMatricula(),
                         nave.getFilas(), nave.getColumnas(), nave.getAlcance());
             }
-            mostrarNaves();
-
-            return true;
         } catch (FileNotFoundException e) {
-            pw.println("Fichero naves.csv no encontrado.");
-            return false;
-        }catch(IOException e){
-            pw.println("Error de escritura en fichero naves.csv.");
-        }
-        finally {
-            if(pw != null){
+            System.out.println("Fichero de naves no encontrado.");
+        } catch (IOException ex) {
+            System.out.println("Error de escritura en fichero de naves.");
+            escrito = false;
+        } finally {
+            if (pw != null) {
                 pw.close();
             }
             return escrito;
         }
     }
+
 
 
     /**
