@@ -310,14 +310,25 @@ public class Porte {
                                   ListaPuertosEspaciales puertosEspaciales,
                                   ListaNaves naves,
                                   ListaPortes portes) {
-        String codigoOrigen,codigoDestino;
+        Porte porte = null;
+        Porte origen, destino;
+        Nave nave;
+        String codigoOrigen,codigoDestino, matricula;
+        int muelleOrigen, terminalDestino;
+        double precio;
         do {System.out.println("Ingrese código de puerto Origen: ");
          codigoOrigen= teclado.nextLine();}
-        while(codigoOrigen=);
+        while(codigoOrigen.equals(" "));
+        do {System.out.println("Ingrese el muelle de Origen (1-4): ");
+            codigoDestino= teclado.nextLine();}
+        while();
         do {System.out.println("Ingrese código de puerto Destino: ");
             codigoDestino= teclado.nextLine();}
-        while(codigoDestino=);
-
+        while();
+        do {System.out.println("Ingrese Terminal Destino (1-6): ");
+            codigoDestino= teclado.nextLine();}
+        while();
+        //generar ID
 
 
 

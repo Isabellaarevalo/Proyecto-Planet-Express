@@ -150,7 +150,7 @@ public class ListaPortes {
         Porte porte;
         boolean escrito = true;
         try {
-            salida = new PrintWriter(new FileWriter(fichero, false));
+            salida = new PrintWriter(new FileWriter(fichero, true));
             for (int i = 0; i < ocupacion; i++) {
                 porte = portes[i];
                 salida.printf("%s;%s;%08d;%C;%s\n", porte.getID(), porte.getNave().getMatricula(), porte.getOrigen(),
