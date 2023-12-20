@@ -21,12 +21,12 @@ public class Envio {
     /**
      * Constructor of the class
      *
-     * @param localizador
-     * @param porte
-     * @param cliente
-     * @param fila
-     * @param columna
-     * @param precio
+     * @param localizador único del envío, formado por el id del porte y 9 letras mayúsculas.
+     * @param porte asociado a cada envío de tipo Porte.
+     * @param cliente es quíen contrata el envío, y es de tipo Cliente.
+     * @param fila del hueco en el que se encuentra el envío en la matriz de Porte.
+     * @param columna del hueco en el que se encuentra el envío en la matriz de Porte.
+     * @param precio del envío.
      */
     public Envio(String localizador, Porte porte, Cliente cliente, int fila, int columna, double precio) {
         this.localizador = localizador;
@@ -72,7 +72,7 @@ public class Envio {
     /**
      * TODO: Método para imprimir la información de este envío en un fichero que respecta el formato descrito en el
      *  enunciado
-     * @param fichero
+     * @param fichero nombre del fichero en el que se guarda la factura del envío.
      * @return Devuelve la información con el siguiente formato como ejemplo ->
      *     -----------------------------------------------------
      *     --------- Factura del envío PM1111AAAABBBBC ---------
@@ -118,8 +118,8 @@ public class Envio {
      *	TODO: Genera un localizador de envío. Este consistirá en una cadena de 15 caracteres, de los cuales los seis
 	 *   primeros será el ID del porte asociado y los 9 siguientes serán letras mayúsculas aleatorias. Ejemplo: PM0123ABCD
      *   NOTA: Usar el objeto rand pasado como argumento para la parte aleatoria.
-     * @param rand
-     * @param idPorte
+     * @param rand genera números aleatorios, utilizados para generar las 9 mayúsculas aleatorias.
+     * @param idPorte identificador del porte de 6 caracteres.
      * @return
      */
     public static String generarLocalizador(Random rand, String idPorte) {
