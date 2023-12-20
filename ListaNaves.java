@@ -14,8 +14,8 @@ public class ListaNaves {
     /**
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
-     * @param capacidad
-     * @param ocupacion
+     * @param capacidad máxima de la lista de naves.
+     * @param ocupacion numero de naves.
      */
     private int capacidad;
     private int ocupacion;
@@ -42,7 +42,7 @@ public class ListaNaves {
 
     /**
      * TODO: insertamos una nueva nave en la lista
-     * @param nave
+     * @param nave que se inserta en la lista de naves.
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarNave(Nave nave) {
@@ -56,7 +56,7 @@ public class ListaNaves {
     }
     /**
      * TODO: Buscamos la nave a partir de la matricula pasada como parámetro
-     * @param matricula
+     * @param matricula asociada con la nave.
      * @return la nave que encontramos o null si no existe
      */
     public Nave buscarNave(String matricula) {
@@ -87,10 +87,10 @@ public class ListaNaves {
      *  mayor o igual que el pasado como argumento, usando el mensaje pasado como argumento para la solicitud y
      *  siguiendo el orden y los textos mostrados en el enunciado.
      *  La función solicita repetidamente la matrícula de la nave hasta que se introduzca una con alcance suficiente
-     * @param teclado
-     * @param mensaje
-     * @param alcance
-     * @return
+     * @param teclado lee la matrícula introducida por el usuario.
+     * @param mensaje solicita al usuario la matrícula de la nave.
+     * @param alcance necesario de la nave.
+     * @return la nave con alcance suficiente.
      */
     public Nave seleccionarNave(Scanner teclado, String mensaje, double alcance) {
         //confirm el equals si lo de dentro de paréntesis está correcto
@@ -103,8 +103,11 @@ public class ListaNaves {
             if (nave == null && !matricula.equals(matricula)) {
                 System.out.println("Matrícula de nave no encontrada.");
             }
+            if(alcance>buscarNave(matricula).getAlcance()) {
+                System.out.println("Alcance de la nave insuficiente");
+            }
 
-        } while (nave == null && !matricula.equals(matricula));
+        } while (nave == null && !matricula.equals(matricula)||(alcance>buscarNave(matricula).getAlcance()));
         return nave;
     }
 
