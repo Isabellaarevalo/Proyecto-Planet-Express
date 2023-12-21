@@ -92,10 +92,13 @@ public class PlanetExpress {
      * @return
      */
     public ListaPortes buscarPorte(Scanner teclado) {
-        int dia,mes,anio;
+        int dia,mes,anio,fila,columna,precio;
         dia=0;mes=0;anio=0;
         Fecha fecha = new Fecha(dia,mes,anio);
-        String codigoOrigen,codigoDestino;
+        String codigoOrigen,codigoDestino,email;
+        char letra;
+
+
         System.out.println("Ingrese código de puerto de Origen: ");
         codigoOrigen = teclado.nextLine();
         System.out.println("Ingrese código de puerto de Destino: ");
@@ -111,8 +114,37 @@ public class PlanetExpress {
                 System.out.println("Fecha introducida incorrecta");
             }
         }while(!fecha.comprobarFecha(dia, mes, anio));
-        System.out.println("");
+        ListaPortes porte = listaPortes.buscarPortes(codigoOrigen,codigoDestino,fecha);
 
+        //Imprimir toStringSimple de clase Porte
+        porte.seleccionarPorte(teclado,"Seleccione un porte","CANCELAR");
+        do{
+            System.out.println("¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?");
+            letra = teclado.next().charAt(0);
+            if(letra != 'n'&& letra != 'e'){
+                System.out.println("El valor de entrada debe ser 'n' o 'e'");
+            }
+        }while(letra != 'n'&& letra != 'e');
+        do {
+            System.out.println("Email del cliente: ");
+            email = teclado.nextLine();
+            if(listaClientes.buscarClienteEmail(email)==null){
+                System.out.println("Email no encontrado");
+            }
+        }while (listaClientes.buscarClienteEmail(email)==null);
+        Cliente cliente =listaClientes.buscarClienteEmail(email);
+
+        do{System.out.println("Fila del hueco: ");
+        fila = teclado.nextInt();
+        System.out.println("Columna del hueco: ");
+        columna = teclado.nextInt();
+        }while(!porte.getPorte().huecoOcupado(fila,columna));
+
+        System.out.println("Precio del envío: ");
+        precio = teclado.nextInt();
+        Random rand = null;
+        Envio.altaEnvio(teclado,rand,porte,cliente);
+        System.out.println("Envío "+porte.+"creado correctamente");
 
 
 

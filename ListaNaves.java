@@ -114,8 +114,8 @@ public class ListaNaves {
 
     /**
      * TODO: Genera un fichero CSV con la lista de Naves, SOBREESCRIBIÉNDOLO
-     * @param nombre
-     * @return
+     * @param nombre del fichero
+     * @return si se ha escrito un fichero con la lista de naves.
      */
     public boolean escribirNavesCsv(String nombre) {
         // falta añadir error de cierre de fichero
@@ -146,9 +146,9 @@ public class ListaNaves {
 
     /**
      * TODO: Genera una lista de naves a partir del fichero CSV, usando el argumento como capacidad máxima de la lista
-     * @param fichero
-     * @param capacidad
-     * @return
+     * @param fichero nombre del fichero
+     * @param capacidad máxima de la lista.
+     * @return fichero con la lista de naves.
      */
     public static ListaNaves leerNavesCsv(String fichero, int capacidad) {
         ListaNaves listaNaves = new ListaNaves(capacidad);
