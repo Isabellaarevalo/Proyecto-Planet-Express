@@ -152,7 +152,7 @@ public class Envio {
      *  necesarios al usuario en el orden y con los textos indicados en los ejemplos de ejecución del enunciado
      *  La función solicita repetidamente los parámetros hasta que sean correctos
      * @param teclado lee los datos pro porcionados por el usuario.
-     * @param rand
+     * @param rand para generar el localizador del envío.
      * @param porte para el cual se crea el envío.
      * @param cliente que contrata el envío.
      * @return Envio para el porte y cliente especificados
