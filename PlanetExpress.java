@@ -95,12 +95,11 @@ public class PlanetExpress {
         int dia,mes,anio;
         dia=0;mes=0;anio=0;
         Fecha fecha = new Fecha(dia,mes,anio);
-        Porte codigoOrigen = new Porte();
-        do {
-            System.out.println("Ingrese código de puerto de Origen: ");
-        } while();
+        String codigoOrigen,codigoDestino;
+        System.out.println("Ingrese código de puerto de Origen: ");
+        codigoOrigen = teclado.nextLine();
         System.out.println("Ingrese código de puerto de Destino: ");
-
+        codigoDestino = teclado.nextLine();
         do{ System.out.println("Fecha de Salida: ");
             System.out.println("Día: ");
             dia = teclado.nextInt();
@@ -108,7 +107,11 @@ public class PlanetExpress {
             mes = teclado.nextInt();
             System.out.println("Año: ");
             anio = teclado.nextInt();
+            if(!fecha.comprobarFecha(dia,mes,anio)){
+                System.out.println("Fecha introducida incorrecta");
+            }
         }while(!fecha.comprobarFecha(dia, mes, anio));
+        System.out.println("");
 
 
 
