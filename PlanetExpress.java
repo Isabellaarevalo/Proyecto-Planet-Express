@@ -92,6 +92,26 @@ public class PlanetExpress {
      * @return
      */
     public ListaPortes buscarPorte(Scanner teclado) {
+        int dia,mes,anio;
+        dia=0;mes=0;anio=0;
+        Fecha fecha = new Fecha(dia,mes,anio);
+        Porte codigoOrigen = new Porte();
+        do {
+            System.out.println("Ingrese código de puerto de Origen: ");
+        } while();
+        System.out.println("Ingrese código de puerto de Destino: ");
+
+        do{ System.out.println("Fecha de Salida: ");
+            System.out.println("Día: ");
+            dia = teclado.nextInt();
+            System.out.println("Mes: ");
+            mes = teclado.nextInt();
+            System.out.println("Año: ");
+            anio = teclado.nextInt();
+        }while(!fecha.comprobarFecha(dia, mes, anio));
+
+
+
 
 
 
