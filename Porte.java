@@ -141,10 +141,10 @@ public class Porte {
                     ocuparHueco(envio);
                     return true;
                 }
-                }
             }
-        return false;
         }
+        return false;
+    }
 
 
     /**
@@ -158,13 +158,14 @@ public class Porte {
         Envio envio = buscarEnvio(localizador);
         int fila = envio.getFila();
         int columna = envio.getColumna();
-        if (huecoOcupado(fila, columna)){
+        if (huecoOcupado(fila, columna)) {
             return false;
-        } else{
-        return true;
+        } else {
+            return true;
         }
 
     }
+
     /**
      * TODO: Devuelve una cadena con información completa del porte
      *
@@ -221,31 +222,31 @@ public class Porte {
     public void imprimirMatrizHuecos() {
         int columnas = nave.getFilas();
         int filas = nave.getColumnas();
-        for (int i=1; i<=filas; filas++) {
-            char letra = (char)(64+i);
-            System.out.println(" "+letra);
+        for (int i = 1; i <= filas; filas++) {
+            char letra = (char) (64 + i);
+            System.out.println(" " + letra);
         }
         System.out.println();
-        for (int i=1; i<=filas; columnas++){
+        for (int i = 1; i <= filas; columnas++) {
             System.out.println(i);
-            for (int j=1; j<=columnas; columnas++){
+            for (int j = 1; j <= columnas; columnas++) {
                 char ocupado = ' ';
-                if (huecoOcupado(i, j)){
+                if (huecoOcupado(i, j)) {
                     ocupado = 'X';
                 }
-                if (i==1 || i<=10){
-                    System.out.println("["+ocupado+"]");
+                if (i == 1 || i <= 10) {
+                    System.out.println("[" + ocupado + "]");
                 }
             }
         }
         System.out.println();
-                }
-
+    }
 
 
     /**
      * TODO: Devuelve true si ha podido escribir en un fichero la lista de envíos del porte, siguiendo las indicaciones
      *  del enunciado
+     *
      * @param fichero
      * @return
      */
@@ -254,12 +255,12 @@ public class Porte {
         try {
             salida1 = new PrintWriter(new PrintWriter(fichero));
             salida1.println("-------------------------------------------------------------------------");
-            salida1.println("--------- Lista de envíos del porte "+id+" ---------");
+            salida1.println("--------- Lista de envíos del porte " + id + " ---------");
             salida1.println("-------------------------------------------------------------------------");
             salida1.println("Hueco Cliente");
             //arreglar esto de clientes (for)
-            for (int i=0; i<= huecos.length-1; i++ ) {
-                for (int j = 0; j <= huecos.length-1; j++) {
+            for (int i = 0; i <= huecos.length - 1; i++) {
+                for (int j = 0; j <= huecos.length - 1; j++) {
                     salida1.printf("%s \t \t \t%s %s, %s", buscarEnvio(i, j).getHueco(), buscarEnvio(i, j).getCliente().getNombre(),
                             buscarEnvio(i, j).getCliente().getApellidos(), buscarEnvio(i, j).getCliente().getEmail());
                 }
@@ -268,7 +269,7 @@ public class Porte {
             System.out.println("Error de escritura del fichero");
             return false;
         } finally {
-            if (salida1!=null){
+            if (salida1 != null) {
                 return true;
             }
         }
@@ -280,24 +281,26 @@ public class Porte {
      * TODO: Genera un ID de porte. Este consistirá en una cadena de 6 caracteres, de los cuales los dos primeros
      *  serán PM y los 4 siguientes serán números aleatorios.
      *  NOTA: Usar el objeto rand pasado como argumento para la parte aleatoria.
+     *
      * @param rand
      * @return ejemplo -> "PM0123"
      */
     public static String generarID(Random rand) {
         //REVISAR
-            String ID = "PM";
-            int[] numeros =rand.ints(4,0,9).toArray();
-            for (int numero : numeros) {
-                ID += String.valueOf(numero);
-            }
-            return ID;
+        String ID = "PM";
+        int[] numeros = rand.ints(4, 0, 9).toArray();
+        for (int numero : numeros) {
+            ID += String.valueOf(numero);
         }
+        return ID;
+    }
 
     /**
      * TODO: Crea y devuelve un objeto Porte de los datos que selecciona el usuario de puertos espaciales
      *  y naves y la restricción de que no puede estar repetido el identificador, siguiendo las indicaciones
      *  del enunciado.
      *  La función solicita repetidamente los parametros hasta que sean correctos
+     *
      * @param teclado
      * @param rand
      * @param puertosEspaciales
@@ -305,34 +308,43 @@ public class Porte {
      * @param portes
      * @return
      */
-    //falta por terminar
     public static Porte altaPorte(Scanner teclado, Random rand,
                                   ListaPuertosEspaciales puertosEspaciales,
                                   ListaNaves naves,
                                   ListaPortes portes) {
         Porte porte = null;
-        Porte origen, destino;
+        PuertoEspacial origen, destino;
         Nave nave;
-        String codigoOrigen,codigoDestino, matricula;
+        String codigoOrigen, codigoDestino, matricula, localizador;
         int muelleOrigen, terminalDestino;
+        Fecha fechaSalida, fechaLlegada;
         double precio;
-        do {System.out.println("Ingrese código de puerto Origen: ");
-         codigoOrigen= teclado.nextLine();}
-        while(codigoOrigen.equals(" "));
-        do {System.out.println("Ingrese el muelle de Origen (1-4): ");
-            codigoDestino= teclado.nextLine();}
-        while();
-        do {System.out.println("Ingrese código de puerto Destino: ");
-            codigoDestino= teclado.nextLine();}
-        while();
-        do {System.out.println("Ingrese Terminal Destino (1-6): ");
-            codigoDestino= teclado.nextLine();}
-        while();
-        //generar ID
+        do {
+            origen = puertosEspaciales.seleccionarPuertoEspacial(teclado, "Ingrese código de puerto Origen:");
+            muelleOrigen = Utilidades.leerNumero(teclado, "Ingrese Terminal Origen (1 - " + origen.getMuelles() + "):", 1, origen.getMuelles());
+        } while (origen == null);
+        do {
+            destino = puertosEspaciales.seleccionarPuertoEspacial(teclado, "Ingrese código de puerto Destino:");
+            terminalDestino = Utilidades.leerNumero(teclado, "Ingrese Terminal Destino (1 - " + destino.getMuelles() + "):", 1, destino.getMuelles());
+        }
+        while (destino == null);
+        do {
+            nave = naves.seleccionarNave(teclado, "Ingrese matrícula de Avión:", origen.distancia(destino));
+        }while (nave == null) ;
 
-
-
-        // do while (
-        return null;
+            do {
+                fechaSalida = Utilidades.leerFechaHora(teclado, "Fecha de Salida:");
+                fechaLlegada = Utilidades.leerFechaHora(teclado, "Fecha de Llegada:");
+                if (!fechaSalida.anterior(fechaLlegada)) {
+                    System.out.println("Llegada debe ser posterior a salida.");
+                }
+            } while (!fechaSalida.anterior(fechaLlegada));
+            precio = Utilidades.leerNumero(teclado, "Ingrese precio del pasaje:", 0F, 999999999F);
+            //generar ID
+            do {
+                localizador = generarID(rand);
+            } while (porte.buscarEnvio(localizador) != null);
+            porte = new Porte(localizador, nave, origen, muelleOrigen, fechaSalida, destino, terminalDestino, fechaLlegada, precio);
+            return porte;
+        }
     }
-}

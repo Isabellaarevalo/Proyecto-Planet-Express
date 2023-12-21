@@ -151,7 +151,12 @@ public class Envio {
         int fila, columna;
         char letraColumna;
         double precio;
-        if (envio.cliente.maxEnviosAlcanzado()){
+        do{
+            //imprimir matriz
+            //elegir un hueco
+            //verificar si el hueco esta ocupado
+            //precio
+            //devuelve el envio
 
         }
 
