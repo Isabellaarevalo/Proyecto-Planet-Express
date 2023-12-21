@@ -14,8 +14,8 @@ public class ListaPortes {
     /**
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
-     * @param capacidad
-     * @param ocupación
+     * @param capacidad máxima de la lista.
+     * @param ocupación número de portes.
      */
     private int capacidad;
     private int ocupacion=0;
@@ -44,7 +44,7 @@ public class ListaPortes {
 
     /**
      * TODO: Devuelve true si puede insertar el porte
-     * @param porte
+     * @param porte a insertar
      * @return false en caso de estar llena la lista o de error
      */
     public boolean insertarPorte(Porte porte) {
@@ -60,7 +60,7 @@ public class ListaPortes {
 
     /**
      * TODO: Devuelve el objeto Porte que tenga el identificador igual al parámetro id
-     * @param id
+     * @param id identificador del porte que buscamos
      * @return el objeto Porte que encontramos o null si no existe
      */
     public Porte buscarPorte(String id) {
@@ -81,10 +81,10 @@ public class ListaPortes {
     /**
      * TODO: Devuelve un nuevo objeto ListaPortes conteniendo los Portes que vayan de un puerto espacial a otro
      *  en una determinada fecha
-     * @param codigoOrigen
-     * @param codigoDestino
-     * @param fecha
-     * @return
+     * @param codigoOrigen código de el puerto de el que sale el Porte
+     * @param codigoDestino código de el puerto al que llega el Porte.
+     * @param fecha en la que sale el porte.
+     * @return los portes encontrados con dichos parámetros.
      */
     public ListaPortes buscarPortes(String codigoOrigen, String codigoDestino, Fecha fecha) {
         ListaPortes listaPortes = null;
@@ -118,10 +118,10 @@ public class ListaPortes {
      *  la solicitud y siguiendo el orden y los textos mostrados en el enunciado, y usando la cadena cancelar para
      *  salir devolviendo null.
      *  La función solicita repetidamente hasta que se introduzca un ID correcto
-     * @param teclado
-     * @param mensaje
-     * @param cancelar
-     * @return
+     * @param teclado lee por teclado el id introducido por el usuario
+     * @param mensaje solicita al usuarii que introduzca el id
+     * @param cancelar palabra con la que se sale del bucle
+     * @return devuelve el porte buscado
      */
     public Porte seleccionarPorte(Scanner teclado, String mensaje, String cancelar) {
         Porte porteAct = null;
@@ -131,7 +131,11 @@ public class ListaPortes {
             id = teclado.next();
             porteAct = buscarPorte(id);
             if (porteAct == null) {
-                System.out.println("Código de aeropuerto no encontrado.");
+                System.out.println("Porte no encontrado.");
+            }
+            if(id.equals(cancelar)){
+               porteAct==null;
+
             }
         } while (porteAct == null);
         return porteAct;
@@ -140,8 +144,8 @@ public class ListaPortes {
     /**
      * TODO: Ha de escribir la lista de Portes en la ruta y nombre del fichero pasado como parámetro.
      *  Si existe el fichero, SE SOBREESCRIBE, si no existe se crea.
-     * @param fichero
-     * @return
+     * @param fichero nombre del fichero
+     * @return devuelve si se ha escrito en la lista de portes
      */
     public boolean escribirPortesCsv(String fichero) {
         PrintWriter salida = null;
@@ -171,11 +175,11 @@ public class ListaPortes {
     /**
      * TODO: Genera una lista de Portes a partir del fichero CSV, usando los límites especificados como argumentos para
      *  la capacidad de la lista
-     * @param fichero
-     * @param capacidad
-     * @param puertosEspaciales
-     * @param naves
-     * @return
+     * @param fichero nombre del fichero
+     * @param capacidad de la lista de portes
+     * @param puertosEspaciales de salida y llegada de los portes
+     * @param naves que transportan los portes
+     * @return devuelve una lista con los portes
      */
     public static ListaPortes leerPortesCsv(String fichero, int capacidad, ListaPuertosEspaciales puertosEspaciales, ListaNaves naves) {
         BufferedReader entrada = null;
