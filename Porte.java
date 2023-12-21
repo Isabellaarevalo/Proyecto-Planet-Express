@@ -319,18 +319,15 @@ public class Porte {
         int muelleOrigen, terminalDestino;
         Fecha fechaSalida, fechaLlegada;
         double precio;
-        do {
+            //origen
             origen = puertosEspaciales.seleccionarPuertoEspacial(teclado, "Ingrese código de puerto Origen:");
             muelleOrigen = Utilidades.leerNumero(teclado, "Ingrese Terminal Origen (1 - " + origen.getMuelles() + "):", 1, origen.getMuelles());
-        } while (origen == null);
-        do {
+            //destino
             destino = puertosEspaciales.seleccionarPuertoEspacial(teclado, "Ingrese código de puerto Destino:");
             terminalDestino = Utilidades.leerNumero(teclado, "Ingrese Terminal Destino (1 - " + destino.getMuelles() + "):", 1, destino.getMuelles());
-        }
-        while (destino == null);
-        do {
+
+            //nave
             nave = naves.seleccionarNave(teclado, "Ingrese matrícula de Avión:", origen.distancia(destino));
-        }while (nave == null) ;
 
             do {
                 fechaSalida = Utilidades.leerFechaHora(teclado, "Fecha de Salida:");

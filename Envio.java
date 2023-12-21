@@ -52,6 +52,8 @@ public class Envio {
         return columna;
     }
     // TODO: Ejemplos: "1A" para el hueco con fila 1 y columna 1, "3D" para el hueco con fila 3 y columna 4
+
+    //falta por hacer
     public String getHueco() {
         return "";
     }
@@ -151,19 +153,19 @@ public class Envio {
         int fila, columna;
         char letraColumna;
         double precio;
-        do{
-            //imprimir matriz
-            //elegir un hueco
+        do {
+            //pido por teclado filas, columnas, precio
+            porte.imprimirMatrizHuecos();
+            fila = Utilidades.leerNumero("Fila:", +envio.getFila(), );
+            columna = Utilidades.leerNumero("Columna:", +envio.getColumna(), envio)
             //verificar si el hueco esta ocupado
             //precio
             //devuelve el envio
-
         }
 
 
-
-
-
-        return ;
+        cliente.aniadirEnvio(envio);
+        porte.ocuparHueco(envio);
+        return new Envio(generarLocalizador(rand, porte.getID()), porte, cliente, fila, columna, precio);
     }
 }

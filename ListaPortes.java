@@ -87,14 +87,12 @@ public class ListaPortes {
      * @return
      */
     public ListaPortes buscarPortes(String codigoOrigen, String codigoDestino, Fecha fecha) {
-        //confirmar el error aquí
         ListaPortes listaPortes = null;
         boolean seCumple = false;
         int i = 0;
         while (i < ocupacion && !seCumple) {
-            if (portes[i].getOrigen().equals(codigoOrigen) && portes[i].getDestino().equals(codigoDestino)
-                    && portes[i].getLlegada()==fecha) {
-                listaPortes = portes[i];
+            if (portes[i].coincide(codigoOrigen, codigoDestino, fecha)){
+                listaPortes.insertarPorte(portes[i]);
                 seCumple = true;
             }
             i++;
