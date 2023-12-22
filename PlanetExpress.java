@@ -339,9 +339,12 @@ public class PlanetExpress {
 
                 switch (opcion) {
                     case 1:     // TODO: Alta de Porte
-                        Porte porte = Porte.altaPorte(teclado, rand, planetExpress.listaPuertosEspaciales, planetExpress.listaNaves,
-                        planetExpress.listaPortes);
-                        planetExpress.listaPortes.insertarPorte(porte);
+                        if (!planetExpress.maxPortesAlcanzado()) {
+                            Porte porte = Porte.altaPorte(teclado, rand, planetExpress.listaPuertosEspaciales, planetExpress.listaNaves, planetExpress.listaPortes);
+                            planetExpress.listaPortes.insertarPorte(porte);
+                        } else {
+                            System.out.println("No se pueden dar de alta más Portes.");
+                        }
                         break;
                     case 2:     // TODO: Alta de Cliente
                         Cliente cliente = Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente);

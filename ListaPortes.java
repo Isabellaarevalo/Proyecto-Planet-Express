@@ -32,13 +32,14 @@ public class ListaPortes {
     /**
      * Número de portes en la lista
      */
-    private int ocupacion=0;
+    private int ocupacion;
     /**
      * Constructor que inicializa la lista en una capacidad determinada
      */
     public ListaPortes(int capacidad) {
         this.capacidad = capacidad;
         this.portes = new Porte[capacidad];
+        this.ocupacion = 0;
         
 		
 		
@@ -58,7 +59,6 @@ public class ListaPortes {
      */
     public boolean estaLlena() {
         return capacidad==ocupacion;
-
     }
 
 	//TODO: devuelve un porte dado un indice

@@ -436,6 +436,7 @@ public class Porte {
             //destino
             destino = puertosEspaciales.seleccionarPuertoEspacial(teclado, "Ingrese código de puerto Destino:");
             terminalDestino = Utilidades.leerNumero(teclado, "Ingrese Terminal Destino (1 - " + destino.getMuelles() + "):", 1, destino.getMuelles());
+            naves.mostrarNaves();
 
             //nave
             nave = naves.seleccionarNave(teclado, "Ingrese matrícula de la Nave:", origen.distancia(destino));
@@ -450,8 +451,9 @@ public class Porte {
             //generar ID
             do {
                 localizador = generarID(rand);
+                porte = new Porte(localizador, nave, origen, muelleOrigen, fechaSalida, destino, terminalDestino, fechaLlegada, precio);
             } while (porte.buscarEnvio(localizador) != null);
-            porte = new Porte(localizador, nave, origen, muelleOrigen, fechaSalida, destino, terminalDestino, fechaLlegada, precio);
+        System.out.println("Porte "+porte.getID()+" creado correctamente.");
             return porte;
         }
     }
