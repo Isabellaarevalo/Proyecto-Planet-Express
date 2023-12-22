@@ -1,4 +1,6 @@
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
@@ -37,8 +39,6 @@ public class PlanetExpress {
         this.maxPortes= maxPortes;
         this.maxClientes = maxClientes;
         this.maxEnviosPorCliente = maxEnviosPorCliente;
-
-
     }
 
 
@@ -70,24 +70,26 @@ public class PlanetExpress {
      * @param ficheroEnvios nombre del fichero con los envíos
      */
     public void guardarDatos(String ficheroPuertos, String ficheroNaves, String ficheroPortes, String ficheroClientes, String ficheroEnvios) {
-        boolean seCumple;
-        seCumple = listaPuertosEspaciales.escribirPuertosEspacialesCsv(ficheroPuertos)&& listaNaves.escribirNavesCsv(ficheroNaves)
-                && listaPortes.escribirPortesCsv(ficheroPortes) && listaClientes.escribirClientesCsv(ficheroClientes);
+        listaPuertosEspaciales.escribirPuertosEspacialesCsv(ficheroPuertos);
+        listaNaves.escribirNavesCsv(ficheroNaves);
+        listaPortes.escribirPortesCsv(ficheroPortes);
+        listaClientes.escribirClientesCsv(ficheroClientes);
+
+        /*
         PrintWriter entrada= null;
         try{
-            entrada= new PrintWriter(ficheroEnvios);
+            entrada= new PrintWriter((new FileWriter(ficheroEnvios, false)));
             entrada.print("");
-        }catch(FileNotFoundException ex){
-            System.out.println("Fichero Envios no encontrado");
-            seCumple=false;
+        }catch(FileNotFoundException ex) {
+            System.out.println("Fichero Envios no encontrado.");
+        }catch (IOException ex) {
+                System.out.println("Error de escritura en fichero de Envíos.");
         }finally{
             if(entrada!=null){
                 entrada.close();
             }
         }
-        //for (int i = 0; i < listaPortes.getOcupacion(); i++) {
-        //    seCumple = seCumple && listaPortes.getPorte().ocuparHueco(envio);
-        //}
+        */
 
     }
     public boolean maxPortesAlcanzado() {
@@ -113,35 +115,37 @@ public class PlanetExpress {
      * de salida determinada
      */
     public ListaPortes buscarPorte(Scanner teclado) {
-        int dia,mes,anio,fila,columna,precio;
-        dia=0;mes=0;anio=0;
-        Fecha fecha = new Fecha(dia,mes,anio);
-        String codigoOrigen,codigoDestino,email;
+        Fecha fecha;
+        int fila, columna;
+        double precio;
+        String codigoOrigen = null, codigoDestino = null, email;
         char letra;
+        Random rand = new Random();
         do {
             codigoOrigen = Utilidades.leerCadena(teclado, "Introduzca el Código Origen:");
-        }while (listaPuertosEspaciales.buscarPuertoEspacial(codigoOrigen)==null);
+        } while (listaPuertosEspaciales.buscarPuertoEspacial(codigoOrigen) == null);
 
         do {
-            codigoOrigen = Utilidades.leerCadena(teclado, "Introduzca el Código Destino:");
-        }while (listaPuertosEspaciales.buscarPuertoEspacial(codigoDestino)==null);
+            codigoDestino = Utilidades.leerCadena(teclado, "Introduzca el Código Destino:");
+        } while (listaPuertosEspaciales.buscarPuertoEspacial(codigoDestino) == null);
 
-        do{ System.out.println("Fecha de Salida: ");
-            System.out.println("Día: ");
-            dia = teclado.nextInt();
-            System.out.println("Mes: ");
-            mes = teclado.nextInt();
-            System.out.println("Año: ");
-            anio = teclado.nextInt();
-            if(Utilidades.leerFechaHora()){
-                System.out.println("Fecha introducida incorrecta");
+        do {
+            fecha = (Utilidades.leerFecha(teclado, "Fecha de salida:"));
+            if (fecha == null) {
+                System.out.println("Fecha introducida incorrecta.");
             }
-        }while(!fecha.comprobarFecha(dia, mes, anio));
+        } while (fecha == null);
+        return this.listaPortes.buscarPortes(codigoOrigen, codigoDestino, fecha);
 
-        ListaPortes porte = listaPortes.buscarPortes(codigoOrigen,codigoDestino,fecha);
 
-        //Imprimir toStringSimple de clase Porte
-        porte.seleccionarPorte(teclado,"Seleccione un porte","CANCELAR");
+       /* porte.seleccionarPorte(teclado,"Seleccione un porte:","CANCELAR");
+        if (porte == null){
+            System.out.println("Porte no encontrado.");
+            do{
+                porte.seleccionarPorte(teclado,"Seleccione un porte:","CANCELAR");
+            } while (porte ==null);
+        }
+
         do{
             System.out.println("¿Comprar envío para un nuevo cliente (n), o para uno ya existente (e)?");
             letra = teclado.next().charAt(0);
@@ -156,27 +160,24 @@ public class PlanetExpress {
                 System.out.println("Email no encontrado");
             }
         }while (listaClientes.buscarClienteEmail(email)==null);
+
         Cliente cliente =listaClientes.buscarClienteEmail(email);
 
         do{System.out.println("Fila del hueco: ");
-        fila = teclado.nextInt();
-        System.out.println("Columna del hueco: ");
-        columna = teclado.nextInt();
-        }while(!porte.getPorte().huecoOcupado(fila,columna));
+            fila = teclado.nextInt();
+            System.out.println("Columna del hueco: ");
+            columna = teclado.nextInt();
+        }while(!porte.getPorte(i).huecoOcupado(fila,columna));
 
         System.out.println("Precio del envío: ");
         precio = teclado.nextInt();
-        Random rand = null;
-        Envio.altaEnvio(teclado,rand,porte,cliente);
-        System.out.println("Envío "+porte.+"creado correctamente");
-
-
-
-
+        Envio.altaEnvio(teclado, rand, porte, cliente);
+        System.out.println("Envío "porte."creado correctamente");
 
         return listaPortes.buscarPortes(codigoOrigen, codigoDestino, fecha);
     }
-
+    */
+    }
 
     /**
      * TODO: Metodo para contratar un envio tal y como se indica en el enunciado de la práctica. Se contrata un envio para un porte
@@ -252,35 +253,42 @@ public class PlanetExpress {
      * y concluirá la ejecución del mismo: `Número de argumentos incorrecto`.
      */
     public static void main(String[] args) {
+        Random rand = new Random();
         if (args.length != 10) {
             System.out.println("Número de argumentos incorrecto");
-            return;
         }
-        int opcion;
-        do {
-            opcion = menu(teclado);
-            switch (opcion) {
-                case 1:     // TODO: Alta de Porte
+        else{
+            PlanetExpress planetExpress = new PlanetExpress(Integer.parseInt(args[0]), Integer.parseInt(args[1]),
+                    Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]));
+            planetExpress.cargarDatos(args[5], args[6], args[7], args[8], args[9]);
+            int opcion;
+            Scanner teclado = new Scanner(System.in);
+            do {
+                opcion = menu(teclado);
+
+                switch (opcion) {
+                    case 1:     // TODO: Alta de Porte
+                        Porte porte = Porte.altaPorte(teclado, rand, planetExpress.listaPuertosEspaciales, planetExpress.listaNaves,
+                        planetExpress.listaPortes);
+                        planetExpress.listaPortes.insertarPorte(porte);
+                        break;
+                    case 2:     // TODO: Alta de Cliente
+                        Cliente cliente = Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente);
+                        planetExpress.listaClientes.insertarCliente(cliente);
+                        break;
+                    case 3:     // TODO: Buscar Porte
+
+                        break;
+                    case 4:     // TODO: Listado de envíos de un cliente
+
+                        break;
+                    case 5:     // TODO: Lista de envíos de un porte
 
 
-                    break;
-                case 2:     // TODO: Alta de Cliente
-
-
-                    break;
-                case 3:     // TODO: Buscar Porte
-
-
-                    break;
-                case 4:     // TODO: Listado de envíos de un cliente
-
-                    break;
-                case 5:     // TODO: Lista de envíos de un porte
-
-
-                    break;
-            }
-        } while (opcion != 0);
+                        break;
+                }
+            } while (opcion != 0);
+        }
 
 
     }

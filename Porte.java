@@ -327,22 +327,21 @@ public class Porte {
         double precio;
             //origen
             origen = puertosEspaciales.seleccionarPuertoEspacial(teclado, "Ingrese código de puerto Origen:");
-            muelleOrigen = Utilidades.leerNumero(teclado, "Ingrese Terminal Origen (1 - " + origen.getMuelles() + "):", 1, origen.getMuelles());
+            muelleOrigen = Utilidades.leerNumero(teclado, "Ingrese Muelle Origen (1 - " + origen.getMuelles() + "):", 1, origen.getMuelles());
             //destino
             destino = puertosEspaciales.seleccionarPuertoEspacial(teclado, "Ingrese código de puerto Destino:");
             terminalDestino = Utilidades.leerNumero(teclado, "Ingrese Terminal Destino (1 - " + destino.getMuelles() + "):", 1, destino.getMuelles());
 
             //nave
-            nave = naves.seleccionarNave(teclado, "Ingrese matrícula de Avión:", origen.distancia(destino));
+            nave = naves.seleccionarNave(teclado, "Ingrese matrícula de la Nave:", origen.distancia(destino));
 
-            do {
                 fechaSalida = Utilidades.leerFechaHora(teclado, "Fecha de Salida:");
                 fechaLlegada = Utilidades.leerFechaHora(teclado, "Fecha de Llegada:");
                 if (!fechaSalida.anterior(fechaLlegada)) {
                     System.out.println("Llegada debe ser posterior a salida.");
                 }
-            } while (!fechaSalida.anterior(fechaLlegada));
-            precio = Utilidades.leerNumero(teclado, "Ingrese precio del pasaje:", 0F, 999999999F);
+
+            precio = Utilidades.leerNumero(teclado, "Ingrese precio del porte:", 0F, 999999999F);
             //generar ID
             do {
                 localizador = generarID(rand);

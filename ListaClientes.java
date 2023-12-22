@@ -191,7 +191,7 @@ public class ListaClientes {
             String linea;
             while ((linea = entrada.readLine()) != null) {
                 String [] dato = linea.split(";");
-                Cliente cliente = new Cliente (dato[0], dato[1], dato[2], Integer.parseInt(dato[4]));
+                Cliente cliente = new Cliente (dato[0], dato[1], dato[2], maxEnviosPorCliente);
                 listaClientes.insertarCliente(cliente);
             }
         } catch (FileNotFoundException ex) {

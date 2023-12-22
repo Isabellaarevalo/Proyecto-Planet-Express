@@ -139,23 +139,23 @@ public class ListaNaves {
             System.out.print(mensaje);
             matricula = teclado.next();
             nave = buscarNave(matricula);
-            if (nave == null && !matricula.equals(matricula)) {
+            if (nave == null) {
                 System.out.println("Matrícula de nave no encontrada.");
             }
-            if(alcance>buscarNave(matricula).getAlcance()) {
-                System.out.println("Alcance de la nave insuficiente");
+            if(alcance<buscarNave(matricula).getAlcance()) {
+                System.out.println("Alcance de la nave insuficiente.");
             }
 
-        } while (nave == null && !matricula.equals(matricula)||(alcance>buscarNave(matricula).getAlcance()));
+        } while (nave == null);
         return nave;
     }
 
 
     /**
      * TODO: Genera un fichero CSV con la lista de Naves, SOBREESCRIBIÉNDOLO
-     * Método que compruebe si se ha escrito en el fichero
-     * @param nombre del fichero
-     * @return true si se ha escrito en el fichero,null en caso contrario
+     * Método que compruebe si se ha escrito en el fichero naves
+     * @param nombre del fichero naves
+     * @return true si se ha escrito en el fichero, null en caso contrario
      */
     public boolean escribirNavesCsv(String nombre) {
         // falta añadir error de cierre de fichero

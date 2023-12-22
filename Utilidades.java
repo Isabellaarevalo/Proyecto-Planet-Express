@@ -20,17 +20,20 @@ public class Utilidades {
      * @return int numero devuelve el núemero entero cuando sea válido
      */
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
-        int numero;
-        do {
+        int num = -1;
+        boolean valido = false;
+        while (!valido) {
             System.out.print(mensaje);
-            numero = teclado.nextInt();
-            if (numero < minimo)
-                System.out.println("El número " + numero + " no es mayor que " + minimo);
-            else if (numero > maximo)
-                System.out.println("El número " + numero + " no es menor que " + maximo);
-        } while (numero < minimo || numero > maximo);
-        return numero;
-
+            if (teclado.hasNextInt()) {
+                num = teclado.nextInt();
+                if (num >= minimo && num <= maximo) {
+                    valido = true;
+                }
+            } else {
+                teclado.next();
+            }
+        }
+        return num;
     }
 
     /**
@@ -42,20 +45,20 @@ public class Utilidades {
      * @return long numero devuelve el núemero de tipo long cuando sea válido
      */
     public static long leerNumero(Scanner teclado, String mensaje, long minimo, long maximo) {
-        long numero = -1;
+        long numLg = -1;
         boolean valido = false;
         while (!valido) {
             System.out.print(mensaje);
             if (teclado.hasNextLong()) {
-                numero = teclado.nextLong();
-                if (numero >= minimo && numero <= maximo) {
+                numLg = teclado.nextLong();
+                if (numLg >= minimo && numLg <= maximo) {
                     valido = true;
                 }
             } else {
                 teclado.next();
             }
         }
-        return numero;
+        return numLg;
     }
 
     /**
@@ -67,20 +70,20 @@ public class Utilidades {
      * @return double numero devuelve el núemero de tipo double cuando sea válido
      */
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
-        double numero;
+        double numDou=-1.1;
         boolean valido = false;
-        while (!valido){
-
-        }
-        do {
+        while (!valido) {
             System.out.print(mensaje);
-            numero = teclado.nextInt();
-            if (numero < minimo)
-                System.out.println("El número " + numero + " no es mayor que " + minimo);
-            else if (numero > maximo)
-                System.out.println("El número " + numero + " no es menor que " + maximo);
-        } while (numero < minimo || numero > maximo);
-        return numero;
+            if (teclado.hasNextDouble()) {
+                numDou = Double.parseDouble(teclado.next().replace(',','.'));;
+                if (numDou >= minimo && numDou <= maximo) {
+                    valido = true;
+                }
+            } else {
+                teclado.next();
+            }
+        }
+        return numDou;
     }
 
     /**
@@ -115,10 +118,18 @@ public class Utilidades {
      * @return Fecha devuelve una fecha correcta con su dia,mes y año
      */
     public static Fecha leerFecha(Scanner teclado, String mensaje) {
-        int dia=0;
-        int mes=0;
-        int anio=0;
-        Fecha.comprobarFecha(dia, mes, anio);
+        System.out.println(mensaje);
+        int dia, mes, anio;
+        boolean fechaCorrecta = false;
+        do {
+            dia = leerNumero(teclado, "Ingrese día:", 1, Fecha.DIAS_MES);
+            mes = leerNumero(teclado, "Ingrese mes:", 1, Fecha.MESES_ANIO);
+            anio = leerNumero(teclado, "Ingrese año:", Fecha.PRIMER_ANIO, Fecha.ULTIMO_ANIO);
+            fechaCorrecta = Fecha.comprobarFecha(dia, mes, anio);
+            if (!fechaCorrecta) {
+                System.out.println("Fecha introducida incorrecta.");
+            }
+        } while (!fechaCorrecta);
         return new Fecha(dia, mes, anio);
     }
 
@@ -131,16 +142,25 @@ public class Utilidades {
      * correcta con su hora,minutos y segundos.
      */
     public static Fecha leerFechaHora(Scanner teclado, String mensaje) {
-        int dia=0;
-        int mes=0;
-        int anio=0;
-        int hora=0;
-        int minuto=0;
-        int segundo=0;
-        Fecha.comprobarFecha(dia, mes, anio);
-        Fecha.comprobarHora(hora,minuto,segundo);
+        int hora, minuto, segundo = 0, dia, mes, anio;
+        System.out.println(mensaje);
+        boolean horaCorrecta = false, fechaCorrecta = false;
+        do {
+            dia = leerNumero(teclado, "Ingrese día:", 1, Fecha.DIAS_MES);
+            mes = leerNumero(teclado, "Ingrese mes:", 1, Fecha.MESES_ANIO);
+            anio = leerNumero(teclado, "Ingrese año:", Fecha.PRIMER_ANIO, Fecha.ULTIMO_ANIO);
+            hora = leerNumero(teclado, "Ingrese hora:", 1, 23);
+            minuto = leerNumero(teclado, "Ingrese minuto:", 0, 59);
+            segundo = leerNumero(teclado, "Ingrese segundo:", 0, 59);
+            horaCorrecta = Fecha.comprobarHora(hora, minuto, segundo);
+            fechaCorrecta = Fecha.comprobarFecha(dia, mes, anio);
+            if (!(fechaCorrecta && horaCorrecta)) {
+                System.out.println("Fecha u hora introducida incorrecta.");
+            }
+        } while (!(fechaCorrecta && horaCorrecta));
         return new Fecha(dia, mes, anio, hora, minuto, segundo);
     }
+
 
     /**
      * TODO: Imprime por pantalla el String pasado por parámetro
@@ -154,12 +174,4 @@ public class Utilidades {
         return teclado.next();
     }
 
-    public static char numeroLetra(int numero) {
-        char[] letra = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-        return letra[numero - 1];
-    }
-    public static int letraNumero(char letra) {
-        int numero = letra - 'A' + 1;
-        return numero;
-    }
 }
