@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * Description of the class
- *Utilidades es una clase que se puede emplear para diversas acciones
+ * Utilidades es una clase que se puede emplear para diversas acciones
  * como leer un numero,caracter,así como una fecha, y comprobando que
  * los datos introducidos son correctos.
  * @author Isabella Arévalo
@@ -13,6 +13,8 @@ public class Utilidades {
 
     /**
      * TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
+     * Método que solicita un número hasta que se introduzca uno entre
+     * los límites pasados por parámetro.
      * @param teclado lee por teclado el número introducido por el usuario
      * @param mensaje solicita al usuario que introzuca un número
      * @param minimo valor mínimo entre el que puede estar comprendido el número
@@ -35,6 +37,8 @@ public class Utilidades {
 
     /**
      * TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
+     * Método que solicita un número hasta que se introduzca uno entre
+     * los límites pasados por parámetro.
      * @param teclado lee por teclado el número introducido por el usuario
      * @param mensaje solicita al usuario que introzuca un número
      * @param minimo valor mínimo entre el que puede estar comprendido el número
@@ -60,6 +64,8 @@ public class Utilidades {
 
     /**
      * TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
+     * Método que solicita un número hasta que se introduzca uno entre
+     * los límites pasados por parámetro.
      * @param teclado lee por teclado el número introducido por el usuario
      * @param mensaje solicita al usuario que introzuca un número
      * @param minimo valor mínimo entre el que puede estar comprendido el número
@@ -85,6 +91,8 @@ public class Utilidades {
 
     /**
      * TODO: TODO: Solicita una letra repetidamente hasta que se introduzca uno correcto (dentro de los límites)
+     * Método que solicita una letra hasta que se introduzca uno entre
+     * los límites pasados por parámetro.
      * @param teclado lee por teclado la letra introducida por el usuario
      * @param mensaje solicita al usuario que introzuca una letra
      * @param minimo valor mínimo entre el que puede estar comprendida la letra
@@ -110,6 +118,7 @@ public class Utilidades {
 
     /**
      * TODO: Solicita una fecha repetidamente hasta que se introduzca una correcta
+     * Método que solicita una fecha hasta que se introduzca una correcta.
      * @param teclado lee por teclado la fecha introducida por el usuario
      * @param mensaje pide al usuario que introduzca una fecha
      * @return Fecha devuelve una fecha correcta con su dia,mes y año
@@ -125,6 +134,7 @@ public class Utilidades {
 
     /**
      * TODO: Solicita una fecha y hora repetidamente hasta que se introduzcan unas correctas
+     * Método que solicita una fecha y hora hasta que se introduzcan unas correctas.
      * @param teclado lee por teclado la fecha y hora introducida por el usuario
      * @param mensaje solicita al usuario que introzuca una fecha y hora
      * @return Fecha devuelve una fecha correcta con su dia,mes y año, y una hora
@@ -144,6 +154,7 @@ public class Utilidades {
 
     /**
      * TODO: Imprime por pantalla el String pasado por parámetro
+     * Método que imprime por pantalla el String que se pasa por parámetro
      * @param teclado lee por teclado el string
      * @param s el string pasado por parámetro
      * @return imprime el string del parámetro
@@ -153,11 +164,19 @@ public class Utilidades {
         System.out.print(s);
         return teclado.next();
     }
-
+    /**
+     * Método que devuelve una letra dado un número
+     * @param numero que va a ser equivalente a la posición de la letra
+     *  @return la letra de la lista
+     */
     public static char numeroLetra(int numero) {
         char[] letra = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
         return letra[numero - 1];
-    }
+    }/**
+     * Método que devuelve un número dada una letra
+     * @param letra que va a ser equivalente al número
+     *  @return el número que ocupa la letra
+     */
     public static int letraNumero(char letra) {
         int numero = letra - 'A' + 1;
         return numero;

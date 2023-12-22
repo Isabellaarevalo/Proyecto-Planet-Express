@@ -10,16 +10,36 @@
  * @version     1.0
  */
 public class PuertoEspacial {
-
+    /**
+     * nombre del puerto espacial
+     */
     private String nombre;
+    /**
+     * código del puerto espacial
+     */
     private String codigo;
+    /**
+     * radio distancia de un puerto al Sol
+     */
     private double radio;
+    /**
+     * el ángulo que forma el puerto desde el
+     * eje positivo x hasta la proyección del punto en el plano xy,
+     * siendo el Sol el eje de coordenadas
+     */
     private double azimut;
+    /**
+     * el ángulo desde el eje positivo z hasta el puerto
+     */
     private double polar;
+    /**
+     *número de muelles de carga del puerto espacial
+     */
     private int numMuelles;
 
     /**
      * Constructor of the class
+     * Inicializa los atributos de la clase
      *
      * @param nombre nombre del puerto espacial
      * @param codigo del puerto espacial
@@ -37,22 +57,45 @@ public class PuertoEspacial {
         this.polar = polar;
         this.numMuelles = numMuelles;
     }
+    /**
+     * Getter del atributo nombre
+     *  @return Nombre del puerto
+     */
     public String getNombre() {
         return nombre;
     }
+    /**
+     * Getter del atributo código
+     *  @return código del puerto
+     */
     public String getCodigo() {
         return codigo;
     }
+    /**
+     * Getter del atributo radio
+     *  @return radio del puerto
+     */
     public double getRadio() {
         return radio;
     }
+    /**
+     * Getter del atributo azimut
+     *  @return azimut del puerto
+     */
     public double getAzimut() {
         return azimut;
     }
-
+    /**
+     * Getter del atributo polar
+     *  @return polar del puerto
+     */
     public double getPolar() {
         return polar;
     }
+    /**
+     * Getter del atributo número de muelles
+     *  @return número de muelles del puerto
+     */
     public int getMuelles() {
         return numMuelles;
     }
@@ -60,6 +103,10 @@ public class PuertoEspacial {
     /**
      * TODO: Método para calcular la distancia entre el puerto espacial que recibe el mensaje y el puerto
      *  espacial "destino" siguiendo las ecuaciones del enunciado (Las formulas se encuentran en el enunciado)
+     *
+     *  Método que calcula la distancia entre dos puertos espaciales, calculando
+     *  las coordenadas cartesianas, y posteriormente calculando la distancia
+     *  euclídea.
      * @param destino puerto espacial del destino
      * @return la distancia entre dos puertos espaciales
      */
@@ -82,6 +129,8 @@ public class PuertoEspacial {
 
     /**
      * TODO: Método que crea un String con los datos de un puerto espacial con el siguiente formato:
+     * Método que crea una cadena de texto con los datos de un puerto espacial
+     * con el formato especificado
      * @return ejemplo -> "Gaia Galactic Terminal(GGT), en (1.0 90.0 0.0), con 8 muelles" (Radio, Azimut, Polar)
      */
     public String toString() {
@@ -90,6 +139,8 @@ public class PuertoEspacial {
 
     /**
      * TODO: Método que crea un String con los datos de un aeropuerto con el siguiente formato:
+     * Método que crea una cadena de texto con los datos de un puerto espacial
+     * con el formato especificado
      * @return ejemplo -> "Gaia Galactic Terminal (GGT)"
      */
     public String toStringSimple() {
