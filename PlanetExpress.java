@@ -70,17 +70,24 @@ public class PlanetExpress {
      * @param ficheroEnvios nombre del fichero con los envíos
      */
     public void guardarDatos(String ficheroPuertos, String ficheroNaves, String ficheroPortes, String ficheroClientes, String ficheroEnvios) {
-        boolean seGuardan= false;
-        //comprobar condición if, borrar printWriter
-        if (!listaPuertosEspaciales.escribirPuertosEspacialesCsv(ficheroPuertos) || !listaNaves.escribirNavesCsv(ficheroNaves)
-                || !listaPortes.escribirPortesCsv(ficheroPortes) || !listaClientes.escribirClientesCsv(ficheroClientes)){
-            seGuardan = false;
+        boolean seCumple;
+        seCumple = listaPuertosEspaciales.escribirPuertosEspacialesCsv(ficheroPuertos)&& listaNaves.escribirNavesCsv(ficheroNaves)
+                && listaPortes.escribirPortesCsv(ficheroPortes) && listaClientes.escribirClientesCsv(ficheroClientes);
+        PrintWriter entrada= null;
+        try{
+            entrada= new PrintWriter(ficheroEnvios);
+            entrada.print("");
+        }catch(FileNotFoundException ex){
+            System.out.println("Fichero Envios no encontrado");
+            seCumple=false;
+        }finally{
+            if(entrada!=null){
+                entrada.close();
+            }
         }
-        else {
-            seGuardan = true;
-        }
-
-        //TRY AND CATCH ERROR DE ESCRITURA
+        //for (int i = 0; i < listaPortes.getOcupacion(); i++) {
+        //    seCumple = seCumple && listaPortes.getPorte().ocuparHueco(envio);
+        //}
 
     }
     public boolean maxPortesAlcanzado() {
