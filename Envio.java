@@ -4,18 +4,43 @@ import java.util.Scanner;
 
 /**
  * Description of the class
+ * Envío es una clase que encapsula las variables propias de un
+ * envío,como su localizador,el cliente, el precio,entre otras.
+ * Esta clase se recomienda utilizarla para llamar a métodos
+ * relacionados con un envío, como el hueco que ocupa un envío,
+ * generar un localizador e incluso cancelar un envío.
  *
  * @author Isabella Arévalo
  * @author Sara Galinova
  * @version     1.0
  */
 public class Envio {
+    /**
+     * Localizador del envío
+     * Consiste una cadena única de 15 caracteres, de los cuales los seis primeros
+     * son el ID del porte asociado y los demás letras mayúsculas aleatorias.
+     */
 
     private String localizador;
+    /**
+     * Porte asociado al envío
+     */
     private Porte porte;
+    /**
+     * Cliente asociado al envío
+     */
     private Cliente cliente;
+    /**
+     * Fila del hueco donde se asigna el envío dentro del Porte.
+     */
     private int fila;
+    /**
+     * Columna del hueco donde se asigna el envío dentro del Porte.
+     */
     private int columna;
+    /**
+     * Precio del envío
+     */
     private double precio;
 
     /**
@@ -36,24 +61,47 @@ public class Envio {
         this.columna = columna;
         this.precio = precio;
     }
+    /**
+     * Getter del atributo localizador
+     *  @return Localizador del envío
+     */
     public String getLocalizador() {
         return localizador;
     }
+    /**
+     * Getter del atributo porte
+     *  @return porte del envío
+     */
     public Porte getPorte() {
         return porte;
     }
+    /**
+     * Getter del atributo nombre
+     *  @return Nombre del cliente
+     */
     public Cliente getCliente() {
         return cliente;
     }
+    /**
+     * Getter del atributo fila
+     *  @return fila del hueco que ocupa el envío
+     */
     public int getFila() {
         return fila;
     }
+    /**
+     * Getter del atributo columna
+     *  @return columna del hueco que ocupa el envío
+     */
     public int getColumna() {
         return columna;
     }
     // TODO: Ejemplos: "1A" para el hueco con fila 1 y columna 1, "3D" para el hueco con fila 3 y columna 4
-
-    //falta por hacer
+    /**
+     * Getter del hueco que ocupa el envío
+     *  @return Hueco que ocupa el envío con la primera cifra siendo la fila y
+     *  la segunda la letra de la columna
+     */
     public String getHueco() {
         String hueco;
         fila = getFila();
@@ -63,16 +111,29 @@ public class Envio {
          hueco = ""+fila+letra;
         return hueco;
     }
+    /**
+     * Getter del atributo precio
+     *  @return Precio del envío
+     */
     public double getPrecio() {
         return precio;
     }
     //TODO: Texto que debe generar: Envío PM1111AAAABBBBC para Porte PM0066 de GGT M5 (01/01/2023 08:15:00) a CID M1 (01/01/2024 11:00:05) en hueco 6C por 13424,56 SSD
+    /**
+     * Devuelve una cadena de texto con los atributos solicitados en el enunciado
+     * @return Cadena de texto con los datos del envío.
+     */
     public String toString() {
        return "Envío "+localizador+" para Porte "+ porte.getID()+ " de "+porte.getOrigen().getCodigo() + porte.getMuelleOrigen()
                +"("+porte.getSalida()+")"+" a "+porte.getDestino().getCodigo()+porte.getMuelleDestino()+"("+porte.getLlegada()+")"
                +" en hueco "+ getHueco()+" por "+ porte.getPrecio()+"SSD";
 
     }
+    /**
+     * Método que cancela un envío,eliminándolo de la
+     * lista de envíos del porte y del cliente.
+     * @return devuelve true si se ha cancelado correctamente, false en caso contario
+     */
     // TODO: Cancela este envío, eliminándolo de la lista de envíos del porte y del cliente correspondiente
     public boolean cancelar() {
         boolean cancelado = cliente.cancelarEnvio(localizador) && porte.desocuparHueco(localizador);

@@ -3,12 +3,20 @@ import java.util.Scanner;
 
 /**
  * Description of the class
+ * ListaNaves es una clase que encapsula las variables de la
+ * lista de las naves como su capacidad y ocupación.
+ * Esta clase se emplea para realizar métodos relacionados con
+ * las naves, como seleccionar una nave,buscarla,mostrarlas,
+ * o insertar una nueva dentro de la lista de naves.
  *
  * @author Isabella Arévalo
  * @author Sara Galinova
  * @version     1.0
  */
 public class ListaNaves {
+    /**
+     * Lista de naves
+     */
     private Nave[] naves;
 
     /**
@@ -17,8 +25,18 @@ public class ListaNaves {
      * @param capacidad máxima de la lista de naves.
      * @param ocupacion numero de naves.
      */
+
+    /**
+     *Capacidad máxima de la lista de naves
+     */
     private int capacidad;
+    /**
+     * Número de naves en la lista
+     */
     private int ocupacion;
+    /**
+     * Constructor que inicializa la lista en una capacidad determinada
+     */
     public ListaNaves(int capacidad) {
         this.capacidad = capacidad;
         this.naves = new Nave[capacidad];
@@ -26,22 +44,36 @@ public class ListaNaves {
     }
 
     // TODO: Devuelve el número de naves que hay en la lista
+    /**
+     * Getter del atributo ocupación
+     */
     public int getOcupacion() {
         return ocupacion;
 
     }
     // TODO: ¿Está llena la lista de naves?
+    /**
+     * Método que comprueba si la lista está llena
+     * @return true, que está llena cuando la ocupación tiene el mismo valor
+     * que la capacidad máxima de la lista,false en caso contrario
+     */
     public boolean estaLlena() {
         return capacidad == ocupacion;
 
     }
 	// TODO: Devuelve nave dado un indice
+    /**
+     * Getter de la nave que ocupa cierta posición
+     * @param posicion que ocupa el envío dentro de la lista
+     * @return la nave que ocupa la posición pasada por parámetro en la lista
+     */
     public Nave getNave(int posicion) {
         return naves[posicion];
     }
 
     /**
      * TODO: insertamos una nueva nave en la lista
+     * Método que inserta una nueva nave en la lista
      * @param nave que se inserta en la lista de naves.
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
@@ -56,6 +88,7 @@ public class ListaNaves {
     }
     /**
      * TODO: Buscamos la nave a partir de la matricula pasada como parámetro
+     * Método que busca una nave a partir de su matrícula si la encuentra
      * @param matricula asociada con la nave.
      * @return la nave que encontramos o null si no existe
      */
@@ -73,6 +106,9 @@ public class ListaNaves {
         return naveAct;
     }
     // TODO: Muestra por pantalla las naves de la lista con el formato indicado en el enunciado
+    /**
+     * Método que muestra todas las naves de la lista
+     */
     public void mostrarNaves() {
         for (Nave nave : naves) {
             if (nave != null) {
@@ -87,6 +123,9 @@ public class ListaNaves {
      *  mayor o igual que el pasado como argumento, usando el mensaje pasado como argumento para la solicitud y
      *  siguiendo el orden y los textos mostrados en el enunciado.
      *  La función solicita repetidamente la matrícula de la nave hasta que se introduzca una con alcance suficiente
+     *
+     * Función que selecciona una nave a partir de su matrícula y comprueba si su alcance
+     * es suficiente,comparándolo con el alcance pasado por parámetro.
      * @param teclado lee la matrícula introducida por el usuario.
      * @param mensaje solicita al usuario la matrícula de la nave.
      * @param alcance necesario de la nave.
@@ -114,8 +153,9 @@ public class ListaNaves {
 
     /**
      * TODO: Genera un fichero CSV con la lista de Naves, SOBREESCRIBIÉNDOLO
+     * Método que compruebe si se ha escrito en el fichero
      * @param nombre del fichero
-     * @return si se ha escrito un fichero con la lista de naves.
+     * @return true si se ha escrito en el fichero,null en caso contrario
      */
     public boolean escribirNavesCsv(String nombre) {
         // falta añadir error de cierre de fichero
@@ -146,6 +186,8 @@ public class ListaNaves {
 
     /**
      * TODO: Genera una lista de naves a partir del fichero CSV, usando el argumento como capacidad máxima de la lista
+     * Función que genera una lista con las naves,teniendo en cuenta la capacidad pasada
+     * por parámetro
      * @param fichero nombre del fichero
      * @param capacidad máxima de la lista.
      * @return fichero con la lista de naves.

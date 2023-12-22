@@ -43,11 +43,11 @@ public class PlanetExpress {
     /**
      * TODO: Metodo para leer los datos de los ficheros específicados en el enunciado y los agrega a
      *  la información de PlanetExpress (listaPuertosEspaciales, listaNaves, listaPortes, listaClientes)
-     * @param ficheroPuertos
-     * @param ficheroNaves
-     * @param ficheroPortes
-     * @param ficheroClientes
-     * @param ficheroEnvios
+     * @param ficheroPuertos nombre del fichero de los puertos espaciales
+     * @param ficheroNaves nombre del fichero de las naves
+     * @param ficheroPortes nombre fichero de los portes
+     * @param ficheroClientes nombre del fichero con los clientes
+     * @param ficheroEnvios nombre del fichero con los envíos
      */
     public void cargarDatos(String ficheroPuertos, String ficheroNaves, String ficheroPortes, String ficheroClientes, String ficheroEnvios) {
 
@@ -59,11 +59,11 @@ public class PlanetExpress {
     /**
      * TODO: Metodo para almacenar los datos de PlanetExpress en los ficheros .csv especificados
      *  en el enunciado de la práctica
-     * @param ficheroPuertos
-     * @param ficheroNaves
-     * @param ficheroPortes
-     * @param ficheroClientes
-     * @param ficheroEnvios
+     * @param ficheroPuertos nombre del fichero con los puertos espaciales
+     * @param ficheroNaves nombre del fichero con las naves
+     * @param ficheroPortes nombre del fichero con los portes
+     * @param ficheroClientes nombre del fichero con los clientes
+     * @param ficheroEnvios nombre del fichero con los envíos
      */
     public void guardarDatos(String ficheroPuertos, String ficheroNaves, String ficheroPortes, String ficheroClientes, String ficheroEnvios) {
 
@@ -88,8 +88,9 @@ public class PlanetExpress {
      *  Devuelve una lista de los portes entre dos puertos espaciales con una fecha de salida solicitados por teclado
      *  al usuario en el orden y con los textos establecidos (tomar como referencia los ejemplos de ejecución en el
      *  enunciado de la prática)
-     * @param teclado
-     * @return
+     * @param teclado lee por teclado los datos introducidos por el usuario
+     * @return devuelve una liste de los portes entre los puertos espaciales en una fecha
+     * de salida determinada
      */
     public ListaPortes buscarPorte(Scanner teclado) {
         int dia,mes,anio,fila,columna,precio;
@@ -158,9 +159,9 @@ public class PlanetExpress {
      * TODO: Metodo para contratar un envio tal y como se indica en el enunciado de la práctica. Se contrata un envio para un porte
      *  especificado, pidiendo por teclado los datos necesarios al usuario en el orden y con los textos (tomar como referencia los
      *  ejemplos de ejecución en el enunciado de la prática)
-     * @param teclado
-     * @param rand
-     * @param porte
+     * @param teclado lee por teclado los datos introducidos por el usuario
+     * @param rand genera
+     * @param porte devuelve el envío contratado por el usuario
      */
     public void contratarEnvio(Scanner teclado, Random rand, Porte porte) {
         if (porte != null) {
@@ -175,7 +176,7 @@ public class PlanetExpress {
     /**
      * TODO Metodo statico con la interfaz del menú de entrada a la App.
      * Tiene que coincidir con las trazas de ejecución que se muestran en el enunciado
-     * @param teclado
+     * @param teclado lee por teclado los datos introducidos por el usuario
      * @return opción seleccionada
      */
     public static int menu(Scanner teclado) {

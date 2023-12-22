@@ -2,15 +2,32 @@ import java.util.Scanner;
 
 /**
  * Description of the class
+ * Cliente es una clase que encapsula las variables
+ * que definen a un cliente,como su nombre,email y envíos del cliente.
+ * Esta clase se emplea para las funciones relacionadas con un cliente,
+ * como es añadir un envío,buscarlo, o sele ccionarlo, e incluso dar de alta a
+ * un cliente.
  *
  * @author Isabella Arévalo
  * @author Sara Galinova
  * @version     1.0
  */
 public class Cliente {
+    /**
+     * lista de envíos de los clientes
+     */
     private final ListaEnvios listaEnvios;
+    /**
+     * nombre del cliente
+     */
     private final String nombre;
+    /**
+     * apellidos del cliente
+     */
     private final String apellidos;
+    /**
+     *email del cliente con terminación en @planetexpress.com
+     */
     private final String email;
 
     /**
@@ -27,49 +44,112 @@ public class Cliente {
         this.email = email;
         this.listaEnvios = new ListaEnvios(maxEnvios);
     }
+    /**
+     * Getter del atributo nombre
+     *  @return Nombre del cliente
+     */
     public String getNombre() {
         return nombre;
     }
+    /**
+     * Getter del atributo apellidos
+     * @return Apellidos del cliente
+     */
     public String getApellidos() {
         return apellidos;
     }
+    /**
+     * Getter del atributo email
+     * @return Email del cliente
+     */
     public String getEmail() {
         return email;
     }
     // TODO: Texto que debe generar: Zapp Brannigan, zapp.brannigan@dop.gov
+    /**
+     * Retorna una cadena de texto con el nombre,apellidos y email del cliente.
+     * @return Cadena de texto con los datos del cliente.
+     */
     public String toString() {
         return nombre+" "+apellidos+","+email;
-
     }
+    /**
+     * Método que comprueba si se ha alcanzado el
+     * máximo de envíos si la lista está llena
+     *
+     *  * @return true si esta llena, false en caso contrario
+     */
     // TODO: Devuelve un booleano que indica si se ha alcanzado el número máximo de envíos
     public boolean maxEnviosAlcanzado() {
         return listaEnvios.estaLlena();
     }
 
+
     // TODO: Devuelve un envío en función de su posición
+    /**
+     * Getter del envío
+     * @param i posición del envío
+     * @return el envío en la posición pasada por parámetro
+     */
     public Envio getEnvio(int i) {
         return getEnvio(i);
     }
+    /**
+     * Getter del atributo listaEnvios
+     * @return la lista de envíos
+     */
     public ListaEnvios getListaEnvios() {
         return listaEnvios;
     }
+
     // TODO: Añade un envío al cliente
+    /**
+     * Método que comprueba si se ha añadido
+     * un envío en la lista
+     * @param envio que se añade en la lista
+     * @return true si añade el envío en la lista de envíos del cliente,false
+     * en caso contrario
+     */
     public boolean aniadirEnvio(Envio envio) {
         return listaEnvios.insertarEnvio(envio);
 
     }
+    /**
+     * Método que busca un envío mediante su localizador
+     * @param localizador del envío que se busca
+     * @return el envío con el localizador pasado por parámetro
+     */
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
     }
+    /**
+     * Método que comprueba si se ha eliminado del envío
+     * del cliente.
+     * @param localizador del envío a cancelar
+     *
+     * @return true si se ha eliminado el envío de la lista de envíos del cliente,
+     * false en caso contrario
+     */
     // TODO: Elimina el envío de la lista de envíos del pasajero
     public boolean cancelarEnvio(String localizador) {
         return getListaEnvios().eliminarEnvio(localizador);
 
     }
+    /**
+     * Método que lista los envíos de un cliente
+     * @return la lista con los envíos
+     */
     public void listarEnvios() {
         listaEnvios.listarEnvios();
     }
-    // Encapsula la funcionalidad seleccionarEnvio de ListaEnvios
+    /**
+     * Método que selecciona un envío de la lista envíos
+     * a partir del localizador introducido por el usuario.
+     * @param mensaje solicita al usuario el localizador
+     * @param teclado lee por teclado el localizador introducido por el usuario
+     *
+     * @return devueleve el envío con un localizador válido introducido por el usuario
+     */
     public Envio seleccionarEnvio(Scanner teclado, String mensaje) {
         return listaEnvios.seleccionarEnvio(teclado, mensaje);
     }
@@ -112,6 +192,8 @@ public class Cliente {
 
     /**
      * TODO: Metodo para comprobar que el formato de email introducido sea correcto
+     * Método que comprueba que el formato del email sea correcto,
+     * es decir, que su terminación sea 'planetexpress.com'
      * @param email del usuario que hay que comrpobar.
      * @return Devuelve correcto si el email introducido por el usuario tiene el formato.
      */

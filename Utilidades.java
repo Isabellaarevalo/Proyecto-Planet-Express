@@ -2,7 +2,9 @@ import java.util.Scanner;
 
 /**
  * Description of the class
- *
+ *Utilidades es una clase que se puede emplear para diversas acciones
+ * como leer un numero,caracter,así como una fecha, y comprobando que
+ * los datos introducidos son correctos.
  * @author Isabella Arévalo
  * @author Sara Galinova
  * @version     1.0
@@ -11,11 +13,11 @@ public class Utilidades {
 
     /**
      * TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
-     * @param teclado
-     * @param mensaje
-     * @param minimo
-     * @param maximo
-     * @return int numero
+     * @param teclado lee por teclado el número introducido por el usuario
+     * @param mensaje solicita al usuario que introzuca un número
+     * @param minimo valor mínimo entre el que puede estar comprendido el número
+     * @param maximo valor máximo entre el que puede estar comprendido el número
+     * @return int numero devuelve el núemero entero cuando sea válido
      */
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
         int numero;
@@ -33,11 +35,11 @@ public class Utilidades {
 
     /**
      * TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
-     * @param teclado
-     * @param mensaje
-     * @param minimo
-     * @param maximo
-     * @return long numero
+     * @param teclado lee por teclado el número introducido por el usuario
+     * @param mensaje solicita al usuario que introzuca un número
+     * @param minimo valor mínimo entre el que puede estar comprendido el número
+     * @param maximo valor máximo entre el que puede estar comprendido el número
+     * @return long numero devuelve el núemero de tipo long cuando sea válido
      */
     public static long leerNumero(Scanner teclado, String mensaje, long minimo, long maximo) {
         long numero;
@@ -54,11 +56,11 @@ public class Utilidades {
 
     /**
      * TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
-     * @param teclado
-     * @param mensaje
-     * @param minimo
-     * @param maximo
-     * @return double numero
+     * @param teclado lee por teclado el número introducido por el usuario
+     * @param mensaje solicita al usuario que introzuca un número
+     * @param minimo valor mínimo entre el que puede estar comprendido el número
+     * @param maximo valor máximo entre el que puede estar comprendido el número
+     * @return double numero devuelve el núemero de tipo double cuando sea válido
      */
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
         double numero;
@@ -75,11 +77,11 @@ public class Utilidades {
 
     /**
      * TODO: TODO: Solicita una letra repetidamente hasta que se introduzca uno correcto (dentro de los límites)
-     * @param teclado
-     * @param mensaje
-     * @param minimo
-     * @param maximo
-     * @return char letra
+     * @param teclado lee por teclado la letra introducida por el usuario
+     * @param mensaje solicita al usuario que introzuca una letra
+     * @param minimo valor mínimo entre el que puede estar comprendida la letra
+     * @param maximo valor máximo entre el que puede estar comprendida la letra
+     * @return char letra devuelve la letra cuando sea válida
      */
     public static char leerLetra(Scanner teclado, String mensaje, char minimo, char maximo) {
         char letra;
@@ -97,9 +99,9 @@ public class Utilidades {
 
     /**
      * TODO: Solicita una fecha repetidamente hasta que se introduzca una correcta
-     * @param teclado
-     * @param mensaje
-     * @return Fecha
+     * @param teclado lee por teclado la fecha introducida por el usuario
+     * @param mensaje pide al usuario que introduzca una fecha
+     * @return Fecha devuelve una fecha correcta con su dia,mes y año
      */
     public static Fecha leerFecha(Scanner teclado, String mensaje) {
         int dia=0;
@@ -112,9 +114,10 @@ public class Utilidades {
 
     /**
      * TODO: Solicita una fecha y hora repetidamente hasta que se introduzcan unas correctas
-     * @param teclado
-     * @param mensaje
-     * @return Fecha
+     * @param teclado lee por teclado la fecha y hora introducida por el usuario
+     * @param mensaje solicita al usuario que introzuca una fecha y hora
+     * @return Fecha devuelve una fecha correcta con su dia,mes y año, y una hora
+     * correcta con su hora,minutos y segundos.
      */
     public static Fecha leerFechaHora(Scanner teclado, String mensaje) {
         int dia=0;
@@ -130,9 +133,9 @@ public class Utilidades {
 
     /**
      * TODO: Imprime por pantalla el String pasado por parámetro
-     * @param teclado
-     * @param s
-     * @return
+     * @param teclado lee por teclado el string
+     * @param s el string pasado por parámetro
+     * @return imprime el string del parámetro
      */
     public static String leerCadena(Scanner teclado, String s) {
         s = teclado.nextLine();

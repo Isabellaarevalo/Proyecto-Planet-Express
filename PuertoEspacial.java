@@ -1,6 +1,10 @@
 /**
  * Description of the class
- *
+ *PuertoEspacial es una clase que encapsula las variables
+ * usadas para definir un Puerto Espacial como es el nombre
+ * y el código de un puerto.Esta clase se puede utilizar para
+ * calcular distancias entre puertos, y al necesitar datos sobre
+ * los puertos espaciales.
  * @author Isabella Arévalo
  * @author Sara Galinova
  * @version     1.0
@@ -17,12 +21,13 @@ public class PuertoEspacial {
     /**
      * Constructor of the class
      *
-     * @param nombre
-     * @param codigo
-     * @param radio
-     * @param azimut
-     * @param polar
-     * @param numMuelles
+     * @param nombre nombre del puerto espacial
+     * @param codigo del puerto espacial
+     * @param radio distancia de un puerto al Sol
+     * @param azimut , el ángulo que forma el puerto desde el
+     * eje positivo x hasta la proyección del punto en el plano xy,siendo el Sol el eje de coordenadas
+     * @param polar  el ángulo desde el eje positivo z hasta el puerto
+     * @param numMuelles número de muelles de carga del puerto espacial
      */
     public PuertoEspacial(String nombre, String codigo, double radio, double azimut, double polar, int numMuelles) {
         this.nombre = nombre;
@@ -55,8 +60,8 @@ public class PuertoEspacial {
     /**
      * TODO: Método para calcular la distancia entre el puerto espacial que recibe el mensaje y el puerto
      *  espacial "destino" siguiendo las ecuaciones del enunciado (Las formulas se encuentran en el enunciado)
-     * @param destino
-     * @return
+     * @param destino puerto espacial del destino
+     * @return la distancia entre dos puertos espaciales
      */
     public double distancia(PuertoEspacial destino) {
         // TODO: Para calcular la distancia entre dos Puertos Espaciales, se transforman sus coordenadas esféricas a cartesianas

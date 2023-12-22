@@ -3,12 +3,20 @@ import java.util.Scanner;
 
 /**
  * Description of the class
+ * ListaPuertosEspaciales es una clase que encapsula las variables de la
+ * lista de los puertos como su capacidad y ocupación.
+ * Esta clase se emplea para realizar métodos relacionados con la lista de
+ * todos los puertos, como,buscar,seleccionar o
+ * insertar un puerto en la lista.
  *
  * @author Isabella Arévalo
  * @author Sara Galinova
  * @version     1.0
  */
 public class ListaPuertosEspaciales {
+    /**
+     * Lista con todos los puertos espaciales
+     */
     private PuertoEspacial[] lista;
 
     /**
@@ -17,8 +25,19 @@ public class ListaPuertosEspaciales {
      * @param capacidad máxima de la lista
      * @param ocupacion número de Puertos Espaciales
      */
+
+    /**
+     *Capacidad máxima de la lista
+     */
     private int capacidad;
+    /**
+     * Número de puertos en la lista
+     */
+
     private int ocupacion;
+    /**
+     * Constructor que inicializa la lista en una capacidad determinada
+     */
     public ListaPuertosEspaciales(int capacidad) {
         this.capacidad = capacidad;
         this.lista = new PuertoEspacial[capacidad];
@@ -26,22 +45,36 @@ public class ListaPuertosEspaciales {
 		
     }
     // TODO: Devuelve el número de puertos espaciales que hay en la lista
+    /**
+     * Getter del atributo ocupación
+     */
     public int getOcupacion() {
         return ocupacion;
 
     }
     // TODO: ¿Está llena la lista?
+    /**
+     * Método que comprueba si la lista está llena
+     * @return true, que está llena cuando la ocupación tiene el mismo valor
+     * que la capacidad máxima de la lista,false en caso contrario
+     */
     public boolean estaLlena() {
         return capacidad == ocupacion;
 
     }
 	// TODO: Devuelve un puerto espacial dado un indice
+    /**
+     * Getter del puerto que ocupa cierta posición
+     * @param i que ocupa el puerto dentro de la lista
+     * @return el puerto que ocupa la posición i pasada por parámetro en la lista
+     */
     public PuertoEspacial getPuertoEspacial(int i) {
         return lista[i];
     }
 
     /**
      * TODO: insertamos un Puerto espacial nuevo en la lista
+     * Método que inserta un Puerto espacial nuevo en la lista
      * @param puertoEspacial que se inserta en la lista
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
@@ -57,6 +90,7 @@ public class ListaPuertosEspaciales {
 
     /**
      * TODO: Buscamos un Puerto espacial a partir del codigo pasado como parámetro
+     * Método que busca un Puerto espacial a partir del codigo pasado como parámetro
      * @param codigo del Puerto Espacial a buscar
      * @return Puerto espacial que encontramos o null si no existe
      */
@@ -78,6 +112,8 @@ public class ListaPuertosEspaciales {
      * TODO: Permite seleccionar un puerto espacial existente a partir de su código, usando el mensaje pasado como
      *  argumento para la solicitud y siguiendo el orden y los textos mostrados en el enunciado.
      *  La función solicita repetidamente el código hasta que se introduzca uno correcto
+     *
+     *  Método selecciona un puerto espacial a partir de un código válido
      * @param teclado lee  por teclado el código introducido por el usuario.
      * @param mensaje solicita al usuario que introduzca el código del puerto.
      * @return devuelve el Puerto Espacial con un código válido.
@@ -98,6 +134,7 @@ public class ListaPuertosEspaciales {
 
     /**
      * TODO: Genera un fichero CSV con la lista de puertos espaciales, SOBREESCRIBIENDOLO
+     * Método que genera un fichero CSV con la lista de puertos espaciales
      * @param nombre del fichero
      * @return devuelve un fichero con los puertos espaciales
      */
@@ -130,6 +167,9 @@ public class ListaPuertosEspaciales {
     /**
      * TODO: Genera una lista de PuertosEspaciales a partir del fichero CSV, usando el argumento como capacidad máxima
      *  de la lista
+     *
+     *  Método que genera una lista de PuertosEspaciales a partir del fichero CSV,
+     *  teniendo en cuenta su capacidad máxima
      * @param fichero nombre del fichero
      * @param capacidad máxima de la lista
      * @return devuelve una lista de Puertos Espaciales

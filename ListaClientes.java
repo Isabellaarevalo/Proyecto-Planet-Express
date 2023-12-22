@@ -3,12 +3,20 @@ import java.util.Scanner;
 
 /**
  * Description of the class
+ * ListaClientes es una clase que encapsula las variables
+ * de la lisda de clientes,como es su capacidad y ocupación.
+ * Esta clase se emplea para las funciones relacionadas
+ * con el numero de clientes o los clientes de PlanetExpress,
+ * como buscar o seleccionar un cliente, e insertar un nuevo.
  *
  * @author Isabella Arévalo
  * @author Sara Galinova
  * @version     1.0
  */
 public class ListaClientes {
+    /**
+     * Lista con todos los clientes
+     */
     private Cliente[] clientes;
 
     /**
@@ -17,8 +25,19 @@ public class ListaClientes {
      * @param capacidad de la lista de clientes.
      * @param ocupacion numero de clientes en la lista de clientes.
      */
+
+    /**
+     * capacidad de la lista de clientes
+     */
     private int capacidad;
+    /**
+     * Número de clientes en la lista
+     */
     private int ocupacion = 0;
+    /**
+     * Constructor de la clase que incializa la lista a
+     * una capacidad determinada
+     */
 
     public ListaClientes(int capacidad) {
         this.capacidad = capacidad;
@@ -27,10 +46,19 @@ public class ListaClientes {
     }
 
     // TODO: Devuelve el número de clientes que hay en la lista de clientes
+    /**
+     * Getter del atributo ocupación
+     * @return devuelve el número de clientes que hay en la lista
+     */
     public int getOcupacion() {
         return ocupacion;
 
     }
+    /**
+     * Método que comprueba si la lista está llena
+     * @return que está llena cuando la ocupación tiene el mismo valor
+     * que la capacidad máxima de la lista
+     */
 
     // TODO: ¿Está llena la lista de clientes?
     public boolean estaLlena() {
@@ -39,6 +67,11 @@ public class ListaClientes {
     }
 
     // TODO: Devuelve el cliente dada el indice
+    /**
+     * Getter del cliente que ocupa cierta posición
+     * @param i posición que ocupa el cliente dentro de la lista
+     * @return el cliente que ocupa la posición pasada por parámetro
+     */
     public Cliente getCliente(int i) {
         Cliente cliente = null;
         if (i < ocupacion) {
@@ -48,6 +81,11 @@ public class ListaClientes {
     }
 
     // TODO: Inserta el cliente en la lista de clientes
+    /**
+     * Método que comprueba si se inserta un cliente en la lista
+     * @param cliente que se quiere inserta en la lista
+     * @return true si se inserta correctamente,false si la lista ya está llena
+     */
     public boolean insertarCliente(Cliente cliente) {
         boolean correcto = false;
         if (!estaLlena()) {
@@ -60,6 +98,11 @@ public class ListaClientes {
     }
 
     // TODO: Devuelve el cliente que coincida con el email, o null en caso de no encontrarlo
+    /**
+     * Método que busca un cliente a partid de su email
+     * @param email del cliente que se quiere buscar
+     * @return el cliente con ese email, null si no se ha encontrado
+     */
     public Cliente buscarClienteEmail(String email) {
         Cliente cliente = null;
         boolean seCumple = false;
@@ -79,7 +122,8 @@ public class ListaClientes {
      * TODO: Método para seleccionar un Cliente existente a partir de su email, usando el mensaje pasado como argumento
      *  para la solicitud y, siguiendo el orden y los textos mostrados en el enunciado.
      *  La función debe solicitar repetidamente hasta que se introduzca un email correcto
-     *
+     * Método que selecciona a un cliente a partir del email introducido por el
+     * usuario.
      * @param teclado lee el email introducido por el usuario.
      * @param mensaje solicita al usuario que introduzca el email.
      * @return devuelve el cliente encontrado a partir del email.
@@ -101,9 +145,9 @@ public class ListaClientes {
     /**
      * TODO: Método para guardar la lista de clientes en un fichero .csv, sobreescribiendo la información del mismo
      *  fichero
-     *
+     *Método que comprueba si se ha escrito en el fichero de clientes
      * @param fichero Nombre del fichero.
-     * @return escribe en el fichero los clientes.
+     * @return true si se ha escrito, false en caso contrario.
      */
     public boolean escribirClientesCsv(String fichero) {
         //falta añadir error de cierre de fichero
@@ -132,7 +176,8 @@ public class ListaClientes {
     /**
      * TODO: Genera una lista de Clientes a partir del fichero CSV, usando los límites especificados como argumentos
      *  para la capacidad de la lista y el número de billetes máximo por pasajero
-     *
+     * Método que crea la lista de clientes a partir del fichero csv,
+     * teniendo en cuneta su capacidad y los maximos envíos por cliente
      * @param fichero Nombre del fichero.
      * @param capacidad de la Lista de Clientes.
      * @param maxEnviosPorCliente máximo número de envíos por cliente.
