@@ -40,15 +40,19 @@ public class Utilidades {
      * @return long numero
      */
     public static long leerNumero(Scanner teclado, String mensaje, long minimo, long maximo) {
-        long numero;
-        do {
+        long numero = -1;
+        boolean valido = false;
+        while (!valido) {
             System.out.print(mensaje);
-            numero = teclado.nextInt();
-            if (numero < minimo)
-                System.out.println("El número " + numero + " no es mayor que " + minimo);
-            else if (numero > maximo)
-                System.out.println("El número " + numero + " no es menor que " + maximo);
-        } while (numero < minimo || numero > maximo);
+            if (teclado.hasNextLong()) {
+                numero = teclado.nextLong();
+                if (numero >= minimo && numero <= maximo) {
+                    valido = true;
+                }
+            } else {
+                teclado.next();
+            }
+        }
         return numero;
     }
 
@@ -62,6 +66,10 @@ public class Utilidades {
      */
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
         double numero;
+        boolean valido = false;
+        while (!valido){
+
+        }
         do {
             System.out.print(mensaje);
             numero = teclado.nextInt();
@@ -82,15 +90,18 @@ public class Utilidades {
      * @return char letra
      */
     public static char leerLetra(Scanner teclado, String mensaje, char minimo, char maximo) {
-        char letra;
-        do {
+        char letra = 0;
+        boolean valido = false;
+        while (!valido) {
             System.out.print(mensaje);
-            letra = teclado.next().charAt(0);
-            if (letra < minimo)
-                System.out.println("El número " + letra + " no es mayor que " + minimo);
-            else if (letra > maximo)
-                System.out.println("El número " + letra + " no es menor que " + maximo);
-        } while (letra < minimo || letra > maximo);
+            String entrada = teclado.next();
+            if (entrada.length() == 1) {
+                letra = entrada.charAt(0);
+                if (letra >= minimo && letra <= maximo) {
+                    valido = true;
+                }
+            }
+        }
         return letra;
     }
 
@@ -138,5 +149,14 @@ public class Utilidades {
         s = teclado.nextLine();
         System.out.print(s);
         return teclado.next();
+    }
+
+    public static char numeroLetra(int numero) {
+        char[] letra = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+        return letra[numero - 1];
+    }
+    public static int letraNumero(char letra) {
+        int numero = letra - 'A' + 1;
+        return numero;
     }
 }

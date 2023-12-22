@@ -159,22 +159,21 @@ public class Envio {
      */
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
         Envio envio = null;
-        int fila, columna;
+        int fila = 0, columna = 0;
         char letraColumna;
         double precio;
+        boolean hueco = false;
         do {
-            //pido por teclado filas, columnas, precio
+            fila = Utilidades.leerNumero(teclado, "Fila del hueco:", 1, porte.getNave().getFilas());
+            columna = Utilidades.leerNumero(teclado, "Columna del hueco:", 1, porte.getNave().getFilas());
             porte.imprimirMatrizHuecos();
-            fila = Utilidades.leerNumero("Fila:", +envio.getFila(), );
-            columna = Utilidades.leerNumero("Columna:", +envio.getColumna(), envio)
-            //verificar si el hueco esta ocupado
-            //precio
-            //devuelve el envio
-        }
+        }while (porte.huecoOcupado(fila, porte.getNave().getColumnas())) ;
+        precio = Utilidades.leerNumero(teclado, "Precio del envío:", 1, Double.MAX_VALUE);
+        envio = new Envio(generarLocalizador(rand, porte.getID()), porte, cliente, fila, columna, precio);
 
-
-        cliente.aniadirEnvio(envio);
+        System.out.println("El envío"+envio.getLocalizador()+" se ha creado correctamente.");
+        cliente.getListaEnvios().insertarEnvio(envio);
         porte.ocuparHueco(envio);
-        return new Envio(generarLocalizador(rand, porte.getID()), porte, cliente, fila, columna, precio);
+        return envio;
     }
-}
+    }

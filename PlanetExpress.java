@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -50,9 +52,11 @@ public class PlanetExpress {
      * @param ficheroEnvios
      */
     public void cargarDatos(String ficheroPuertos, String ficheroNaves, String ficheroPortes, String ficheroClientes, String ficheroEnvios) {
-
-
-
+        listaPuertosEspaciales = ListaPuertosEspaciales.leerPuertosEspacialesCsv(ficheroPuertos, maxPuertosEspaciales);
+        listaNaves = ListaNaves.leerNavesCsv(ficheroNaves, maxNaves);
+        listaPortes = ListaPortes.leerPortesCsv(ficheroPortes, maxPortes, listaPuertosEspaciales, listaNaves);
+        listaClientes = ListaClientes.leerClientesCsv(ficheroClientes, maxClientes, maxEnviosPorCliente);
+        ListaEnvios.leerEnviosCsv(ficheroEnvios, listaPortes, listaClientes);
     }
 
 
@@ -66,8 +70,17 @@ public class PlanetExpress {
      * @param ficheroEnvios
      */
     public void guardarDatos(String ficheroPuertos, String ficheroNaves, String ficheroPortes, String ficheroClientes, String ficheroEnvios) {
+        boolean seGuardan= false;
+        //comprobar condición if, borrar printWriter
+        if (!listaPuertosEspaciales.escribirPuertosEspacialesCsv(ficheroPuertos) || !listaNaves.escribirNavesCsv(ficheroNaves)
+                || !listaPortes.escribirPortesCsv(ficheroPortes) || !listaClientes.escribirClientesCsv(ficheroClientes)){
+            seGuardan = false;
+        }
+        else {
+            seGuardan = true;
+        }
 
-
+        //TRY AND CATCH ERROR DE ESCRITURA
 
     }
     public boolean maxPortesAlcanzado() {
@@ -97,12 +110,14 @@ public class PlanetExpress {
         Fecha fecha = new Fecha(dia,mes,anio);
         String codigoOrigen,codigoDestino,email;
         char letra;
+        do {
+            codigoOrigen = Utilidades.leerCadena(teclado, "Introduzca el Código Origen:");
+        }while (listaPuertosEspaciales.buscarPuertoEspacial(codigoOrigen)==null);
 
+        do {
+            codigoOrigen = Utilidades.leerCadena(teclado, "Introduzca el Código Destino:");
+        }while (listaPuertosEspaciales.buscarPuertoEspacial(codigoDestino)==null);
 
-        System.out.println("Ingrese código de puerto de Origen: ");
-        codigoOrigen = teclado.nextLine();
-        System.out.println("Ingrese código de puerto de Destino: ");
-        codigoDestino = teclado.nextLine();
         do{ System.out.println("Fecha de Salida: ");
             System.out.println("Día: ");
             dia = teclado.nextInt();
@@ -110,16 +125,17 @@ public class PlanetExpress {
             mes = teclado.nextInt();
             System.out.println("Año: ");
             anio = teclado.nextInt();
-            if(!fecha.comprobarFecha(dia,mes,anio)){
+            if(Utilidades.leerFechaHora()){
                 System.out.println("Fecha introducida incorrecta");
             }
         }while(!fecha.comprobarFecha(dia, mes, anio));
+
         ListaPortes porte = listaPortes.buscarPortes(codigoOrigen,codigoDestino,fecha);
 
         //Imprimir toStringSimple de clase Porte
         porte.seleccionarPorte(teclado,"Seleccione un porte","CANCELAR");
         do{
-            System.out.println("¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?");
+            System.out.println("¿Comprar envío para un nuevo cliente (n), o para uno ya existente (e)?");
             letra = teclado.next().charAt(0);
             if(letra != 'n'&& letra != 'e'){
                 System.out.println("El valor de entrada debe ser 'n' o 'e'");
@@ -163,11 +179,34 @@ public class PlanetExpress {
      * @param porte
      */
     public void contratarEnvio(Scanner teclado, Random rand, Porte porte) {
+        char eleccion;
+        Cliente cliente = null;
+        Envio envio;
         if (porte != null) {
-
-
-
-
+            eleccion = Utilidades.leerLetra(teclado, "¿Comprar envío para un nuevo cliente (n), o para uno ya existente (e)?", 'n', 'e');
+            eleccion = teclado.next().charAt(0);
+            if (eleccion != 'n' && eleccion != 'e') {
+                System.out.println("El valor de entrada debe ser 'n' o 'e'");
+                if (eleccion == 'n' || eleccion == 'e') {
+                    if (eleccion == 'n' && !maxClientesAlcanzado()) {
+                        teclado.nextLine();
+                        cliente = Cliente.altaCliente(teclado, listaClientes, maxEnviosPorCliente);
+                        insertarCliente(cliente);
+                    } else if (eleccion == 'e') {
+                        cliente = listaClientes.seleccionarCliente(teclado, "Ingrese email del pasajero:");
+                    }
+                }
+            } else {
+                cliente = listaClientes.seleccionarCliente(teclado, "Ingrese email del pasajero:");
+            }
+            if (cliente.maxEnviosAlcanzado()) {
+                System.out.println("El Cliente seleccionado no puede adquirir más envíos.");
+            } else {
+                envio = Envio.altaEnvio(teclado, rand, porte, cliente);
+                porte.ocuparHueco(envio);
+                cliente.aniadirEnvio(envio);
+                System.out.println("Envio " + envio.getLocalizador() + " comprado con éxito.");
+            }
         }
     }
 
@@ -179,7 +218,11 @@ public class PlanetExpress {
      * @return opción seleccionada
      */
     public static int menu(Scanner teclado) {
-
+        int opcion = 0;
+        System.out.println("1. Alta de Porte\n" + "2. Alta de Cliente\n" + "3. Buscar Porte\n" +
+                "4. Mostrar envíos de un cliente\n" + "5. Generar lista de envíos\n" + "0. Salir");
+        opcion = Utilidades.leerNumero(teclado, "Seleccione opción:", 0, 5);
+        return opcion;
     }
 
     /**
@@ -205,8 +248,7 @@ public class PlanetExpress {
             System.out.println("Número de argumentos incorrecto");
             return;
         }
-
-
+        int opcion;
         do {
             opcion = menu(teclado);
             switch (opcion) {

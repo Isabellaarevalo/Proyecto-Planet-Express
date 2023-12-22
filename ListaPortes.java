@@ -134,7 +134,7 @@ public class ListaPortes {
                 System.out.println("Porte no encontrado.");
             }
             if(id.equals(cancelar)){
-               porteAct==null;
+               porteAct = null;
 
             }
         } while (porteAct == null);
