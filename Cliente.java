@@ -168,16 +168,14 @@ public class Cliente {
         String nombre, apellidos, email;
         Cliente cliente = null;
         // do while
-        do{
-            System.out.println("Nombre:");
+        System.out.print("Nombre:");
+        do {
             nombre = teclado.nextLine();
-        } while (nombre.equals(" "));
+        }while(nombre.equals(""));
+        System.out.print("Apellidos:");
+        apellidos = teclado.nextLine();
         do{
-            System.out.println("Apellidos:");
-            apellidos = teclado.nextLine();
-        } while (nombre.equals(""));
-        do{
-            System.out.println("Email:");
+            System.out.print("Email:");
             email = teclado.nextLine();
             if (!correctoEmail(email)) {
                 System.out.println("Email incorrecto.");
@@ -185,8 +183,11 @@ public class Cliente {
                 System.out.println("Email ya existe.");
             }
         } while (!correctoEmail(email) || cliente.getEmail() != null);
-
-        return new Cliente(nombre, apellidos, email, maxEnvios);
+        do{
+            cliente = new Cliente(nombre, apellidos, email, maxEnvios);
+        } while (cliente.getEmail()!=null);
+        System.out.println("Cliente con email "+cliente.getEmail()+" creado correctamente.");
+        return cliente;
     }
 
 
