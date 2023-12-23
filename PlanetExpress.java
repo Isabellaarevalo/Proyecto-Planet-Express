@@ -347,17 +347,26 @@ public class PlanetExpress {
                         }
                         break;
                     case 2:     // TODO: Alta de Cliente
-                        Cliente cliente = Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente);
-                        planetExpress.listaClientes.insertarCliente(cliente);
+                        if (!planetExpress.maxClientesAlcanzado()) {
+                            Cliente cliente = Cliente.altaCliente(teclado, planetExpress.listaClientes, planetExpress.maxEnviosPorCliente);
+                            planetExpress.listaClientes.insertarCliente(cliente);
+                            System.out.println("Cliente con email "+cliente.getEmail()+" creado correctamente.");
+                        } else{
+                            System.out.println("No se puede dar de alta a más Clientes.");
+                        }
                         break;
                     case 3:     // TODO: Buscar Porte
 
                         break;
                     case 4:     // TODO: Listado de envíos de un cliente
+                        Cliente cliente = planetExpress.listaClientes.seleccionarCliente(teclado, "Email del cliente:");
+                        Envio envio = cliente.seleccionarEnvio(teclado,"Seleccione un envío:");
+                        System.out.println("¿Cancelar envío (c), o generar factura (f)?");
+
 
                         break;
                     case 5:     // TODO: Lista de envíos de un porte
-
+                        planetExpress.listaPortes.listarPortes();
 
                         break;
                 }

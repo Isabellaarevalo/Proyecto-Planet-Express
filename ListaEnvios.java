@@ -105,8 +105,8 @@ public class ListaEnvios {
                 envio = envios[i];
                 seCumple = true;
                 }
-            }
             i++;
+            }
         return envio;
     }
 
@@ -159,12 +159,10 @@ public class ListaEnvios {
      * Método que lista todos los envíos por pantalla
      */
     public void listarEnvios() {
-        for (Envio envio1 : envios) {
-            if (envio1 != null) {
-                System.out.println(envio1.toString());
+        for (int i=0; i<ocupacion; i++) {
+                System.out.println(envios[i].toString());
             }
         }
-    }
 
     /**
      * TODO: Permite seleccionar un Envio existente a partir de su localizador, usando el mensaje pasado como argumento
@@ -241,6 +239,7 @@ public class ListaEnvios {
                             clientes.buscarClienteEmail(dato[2]), Integer.parseInt(dato[3]),
                             Integer.parseInt(dato[4]), Double.parseDouble(dato[5]));
                     listaEnvios.insertarEnvio(envio);
+                    clientes.buscarClienteEmail(dato[2]).aniadirEnvio(envio);
                 }
         } catch (FileNotFoundException ex) {
             System.out.println("Fichero envíos no encontrado.");

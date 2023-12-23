@@ -137,16 +137,13 @@ public class ListaPortes {
 
     /**
      * TODO: Muestra por pantalla los Portes siguiendo el formato de los ejemplos del enunciado
-     * Método que imrime por pantalla la lista de los portes
+     * Método que imprime por pantalla la lista de los portes
      */
     public void listarPortes() {
-        // confirm
-        for (Porte porte : Arrays.asList(portes)) {
-            if (porte != null) {
-                System.out.println(porte.toString());
+        for (int i =0; i<ocupacion;i++) {
+                System.out.println(portes[i].toString());
             }
         }
-    }
 
 
     /**

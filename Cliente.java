@@ -167,27 +167,28 @@ public class Cliente {
     public static Cliente altaCliente(Scanner teclado, ListaClientes clientes, int maxEnvios) {
         String nombre, apellidos, email;
         Cliente cliente = null;
-        // do while
         System.out.print("Nombre:");
         do {
             nombre = teclado.nextLine();
         }while(nombre.equals(""));
+
         System.out.print("Apellidos:");
-        apellidos = teclado.nextLine();
+        do{
+            apellidos = teclado.nextLine();
+        } while (apellidos.equals(""));
+
         do{
             System.out.print("Email:");
             email = teclado.nextLine();
             if (!correctoEmail(email)) {
                 System.out.println("Email incorrecto.");
-            } else if (cliente.getEmail() != null) {
-                System.out.println("Email ya existe.");
             }
-        } while (!correctoEmail(email) || cliente.getEmail() != null);
-        do{
-            cliente = new Cliente(nombre, apellidos, email, maxEnvios);
-        } while (cliente.getEmail()!=null);
-        System.out.println("Cliente con email "+cliente.getEmail()+" creado correctamente.");
-        return cliente;
+            else if(clientes.buscarClienteEmail(email)!=null){
+                System.out.println("Este email ya existe");
+            }
+        } while (!correctoEmail(email)||clientes.buscarClienteEmail(email)!=null);
+
+        return new Cliente(nombre, apellidos, email, maxEnvios);
     }
 
 

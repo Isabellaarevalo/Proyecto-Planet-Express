@@ -165,7 +165,7 @@ public class Porte {
      */
     public int numHuecosLibres() {
         int huecosLibres = 0;
-        for (int i = 0; i <= nave.getFilas(); i++) {
+        for (int i = 0; i < nave.getFilas(); i++) {
             for (int j = 0; j < nave.getColumnas(); j++) {
                 if (!huecos[i][j]) {
                     huecosLibres++;
